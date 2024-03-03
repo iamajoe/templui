@@ -65,10 +65,10 @@ func WithKind(kind Kind) OptsFn {
 	}
 }
 
-func New(opts ...OptsFn) *Button {
-	c := &Button{}
+func New(opts ...OptsFn) Button {
+	var c Button
 	for _, opt := range opts {
-		opt(c)
+		opt(&c)
 	}
 
 	return c

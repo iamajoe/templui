@@ -67,10 +67,10 @@ func WithTarget(target Target) OptsFn {
 	}
 }
 
-func New(opts ...OptsFn) *Anchor {
-	c := &Anchor{}
+func New(opts ...OptsFn) Anchor {
+	var c Anchor
 	for _, opt := range opts {
-		opt(c)
+		opt(&c)
 	}
 
 	return c
