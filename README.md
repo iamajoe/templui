@@ -44,7 +44,6 @@ You can still construct the properties manually by providing the right custom fu
     WithKind(button.KindSubmit).
     WithDisabled().
     WithClasses("foo")
-)
 ```
 
 ## Development
