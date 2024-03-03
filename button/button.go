@@ -19,6 +19,7 @@ type (
 	Button struct {
 		ID         string
 		ClassNames []string
+		Attributes templ.Attributes
 		Disabled   bool
 		Kind       Kind
 
@@ -36,6 +37,20 @@ func WithID(id string) OptsFn {
 func WithClasses(classes ...string) OptsFn {
 	return func(element *Button) error {
 		element.ClassNames = append(element.ClassNames, classes...)
+		return nil
+	}
+}
+
+func WithAttributes(attributes map[string]any) OptsFn {
+	return func(element *Button) error {
+		if element.Attributes == nil {
+			element.Attributes = make(map[string]any)
+		}
+
+		for k, v := range attributes {
+			element.Attributes[k] = v
+		}
+
 		return nil
 	}
 }
@@ -66,6 +81,11 @@ func (b *Button) WithID(id string) *Button {
 
 func (b *Button) WithClasses(classes ...string) *Button {
 	b.Opts = append(b.Opts, WithClasses(classes...))
+	return b
+}
+
+func (b *Button) WithAttributes(attributes map[string]any) *Button {
+	b.Opts = append(b.Opts, WithAttributes(attributes))
 	return b
 }
 

@@ -18,6 +18,9 @@ templ render(props Button) {
 		if props.Disabled {
 			disabled
 		}
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
 	>
 		{ children... }
 	</button>

@@ -10,22 +10,6 @@ go install github.com/iamajoe/templui
 
 ## Documentation
 
-Components are nested under the `ui` package:
-```go
-import "github.com/iamajoe/templui/ui"
-```
-
-These components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
-You can still construct the properties manually by providing the right custom function of the builder pattern:
-```go
-@ui.Anchor(
-    func(p *ui.AnchorProps) error {
-        p.ClassNames = append(p.ClassNames, "bar")
-        return nil
-    },
-)
-```
-
 ### Anchor
 
 ```go
@@ -40,10 +24,18 @@ You can still construct the properties manually by providing the right custom fu
 ### Button
 
 ```go
+import "github.com/iamajoe/templui/button"
+
 @button.New()
+    WithID("zing").
+    WithClasses("foo").
+    WithAttributes(map[string]any{"data-zed": "zung"}).
     WithKind(button.KindSubmit).
     WithDisabled().
-    WithClasses("foo")
+    WithFunction(func(el *button.Button) error {
+        el.ClassNames = append(el.ClassNames, "bar")
+        return nil
+    })
 ```
 
 ## Development
