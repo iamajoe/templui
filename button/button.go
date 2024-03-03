@@ -5,17 +5,17 @@ import (
 	"io"
 )
 
-type ButtonType string
+type Kind string
 
 const (
-	ButtonTypeSubmit ButtonType = "submit"
-	ButtonTypeButton ButtonType = "button"
+	KindSubmit Kind = "submit"
+	KindButton Kind = "button"
 )
 
 type Button struct {
 	Disabled   bool
 	ClassNames []string
-	Type       ButtonType
+	Kind       Kind
 }
 
 func (b *Button) WithDisabled() *Button {
@@ -23,8 +23,8 @@ func (b *Button) WithDisabled() *Button {
 	return b
 }
 
-func (b *Button) WithType(kind ButtonType) *Button {
-	b.Type = kind
+func (b *Button) WithKind(kind Kind) *Button {
+	b.Kind = kind
 	return b
 }
 
@@ -40,9 +40,9 @@ func (b *Button) WithCustomFn(fn func(*Button) error) *Button {
 }
 
 func (b *Button) Render(ctx context.Context, w io.Writer) error {
-	return buttonTempl(b)
+	return render(*b).Render(ctx, w)
 }
 
-func New() Button {
-	return Button{}
+func New() *Button {
+	return &Button{}
 }

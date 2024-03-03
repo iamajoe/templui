@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-func buttonTmpl(props Button) templ.Component {
+func render(props Button) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -36,7 +36,7 @@ func buttonTmpl(props Button) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if len(props.Type) == 0 {
+		if len(props.Kind) == 0 {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" type=\"submit\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -46,7 +46,7 @@ func buttonTmpl(props Button) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(props.Type)))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(props.Kind)))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

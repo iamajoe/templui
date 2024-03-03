@@ -4,12 +4,12 @@ import (
 	"strings"
 )
 
-templ buttonTmpl(props Button) {
+templ render(props Button) {
 	<button
-		if len(props.Type) == 0 {
+		if len(props.Kind) == 0 {
 			type="submit"
 		} else {
-			type={ string(props.Type) }
+			type={ string(props.Kind) }
 		}
 		class={ strings.Join(props.ClassNames, " "), }
 		if props.Disabled {

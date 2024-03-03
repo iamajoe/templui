@@ -1,4 +1,4 @@
-package ui
+package button
 
 import (
 	"context"
@@ -9,15 +9,14 @@ import (
 )
 
 func TestButton(t *testing.T) {
-	comp := Button(
-		ButtonOpts.WithType(ButtonTypeSubmit),
-		ButtonOpts.WithDisabled(),
-		ButtonOpts.WithClasses("foo"),
-		func(p *ButtonProps) error {
+	comp := New().
+		WithKind(KindSubmit).
+		WithDisabled().
+		WithClasses("foo").
+		WithCustomFn(func(p *Button) error {
 			p.ClassNames = append(p.ClassNames, "bar")
 			return nil
-		},
-	)
+		})
 
 	r, w := io.Pipe()
 	go func() {
