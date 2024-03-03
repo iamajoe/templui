@@ -6,6 +6,9 @@ import (
 
 templ render(props Button) {
 	<button
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
 		if len(props.Kind) == 0 {
 			type="submit"
 		} else {
