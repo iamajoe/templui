@@ -13,7 +13,7 @@ func TestButton(t *testing.T) {
 		WithKind(KindSubmit).
 		WithDisabled().
 		WithClasses("foo").
-		WithCustomFn(func(p *Button) error {
+		WithFunction(func(p *Button) error {
 			p.ClassNames = append(p.ClassNames, "bar")
 			return nil
 		})
