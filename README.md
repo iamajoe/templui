@@ -10,10 +10,13 @@ go install github.com/iamajoe/templui
 
 ## Documentation
 
-The components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
+The components are built under `functional options pattern`. As such, You construct the elements as you see fit by chaining the options together into the `New` function.
 
 ```go
-@button.New(WithID("zing"), WithClasses("bg-indigo-500"))
+@button.New(
+	WithID("zing"),
+	WithClasses("bg-indigo-500"),
+)
 ```
 
 ### Extending

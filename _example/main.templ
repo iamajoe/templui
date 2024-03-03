@@ -1,0 +1,23 @@
+package main
+
+import (
+	"github.com/iamajoe/templui/button"
+)
+
+templ web() {
+	<html>
+		<head>
+			<title>My First Page</title>
+		</head>
+		<body>
+			@button.New(
+				button.WithID("zing"),
+				button.WithClasses("foo", "bar"),
+				button.WithAttributes(map[string]any{"data-zed": "zung"}),
+				button.WithKind(button.KindSubmit),
+			) {
+				Click Me
+			}
+		</body>
+	</html>
+}

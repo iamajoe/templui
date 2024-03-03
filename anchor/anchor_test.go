@@ -9,14 +9,14 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	cases := [](struct {
+	cases := []struct {
 		name         string
-		comp         func() *Anchor
+		comp         func() Anchor
 		assertTarget string
-	}){
+	}{
 		{
 			name: "creates",
-			comp: func() *Anchor {
+			comp: func() Anchor {
 				return New(
 					WithID("zing"),
 					WithClasses("foo"),

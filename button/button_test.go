@@ -9,14 +9,14 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	cases := [](struct {
+	cases := []struct {
 		name         string
-		comp         func() *Button
+		comp         func() Button
 		assertTarget string
-	}){
+	}{
 		{
 			name: "creates",
-			comp: func() *Button {
+			comp: func() Button {
 				return New(
 					WithID("zing"),
 					WithClasses("foo"),
