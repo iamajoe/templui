@@ -15,22 +15,7 @@ func TestNew(t *testing.T) {
 		assertTarget string
 	}){
 		{
-			name: "through chain",
-			comp: func() *Anchor {
-				return New().
-					WithID("zing").
-					WithClasses("foo").
-					WithAttributes(map[string]any{"data-zed": "zung"}).
-					WithTarget(TargetBlank).
-					WithHref("https://google.com").
-					WithFunction(func(el *Anchor) error {
-						el.ClassNames = append(el.ClassNames, "bar")
-						return nil
-					})
-			},
-			assertTarget: `a#zing.foo.bar[href="https://google.com"][target="_blank"][data-zed="zung"]`,
-		}, {
-			name: "through argument spread",
+			name: "creates",
 			comp: func() *Anchor {
 				return New(
 					WithID("zing"),
@@ -38,9 +23,8 @@ func TestNew(t *testing.T) {
 					WithAttributes(map[string]any{"data-zed": "zung"}),
 					WithTarget(TargetBlank),
 					WithHref("https://google.com"),
-					func(el *Anchor) error {
+					func(el *Anchor) {
 						el.ClassNames = append(el.ClassNames, "bar")
-						return nil
 					},
 				)
 			},

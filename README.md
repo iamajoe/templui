@@ -12,13 +12,8 @@ go install github.com/iamajoe/templui
 
 The components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
 
-You can either use chaining:
 ```go
-@button.New().WithID("zing")
-```
-Or spread the options under the arguments
-```go
-@button.New(WithID("zing"))
+@button.New(WithID("zing"), WithClasses("bg-indigo-500"))
 ```
 
 ### Extending
@@ -27,13 +22,34 @@ You can easily extend the component to be able to use them throughout your proje
 
 ```go
 func ProjectButton(id string, color string) templ.Component {
-    return button.New().
-        WithClasses("bg-" + color).
-        WithAttributes(map[string]any{"data-id": id}).
-        WithKind(button.KindSubmit)
+    return button.New(
+        WithClasses("bg-" + color),
+        WithAttributes(map[string]any{"data-id": id}),
+        WithKind(button.KindSubmit),
+    )
 }
 
 @ProjectButton("indigo-500")
+```
+
+Or you could for example create a props slice depending on incoming data:
+
+```go
+func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
+    opts := []button.OptsFn {
+        WithClasses("bg-" + color),
+        WithAttributes(map[string]any{"data-id": id}),
+        WithKind(button.KindSubmit),
+    }
+
+    if disabled {
+        opts = append(opts, WithClasses("pointer-events-none"))
+    }
+
+    return opts
+}
+
+@button.New(GetButtonProps("zed", "indigo-500", true)...)
 ```
 
 ## Components

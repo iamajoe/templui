@@ -15,22 +15,7 @@ func TestNew(t *testing.T) {
 		assertTarget string
 	}){
 		{
-			name: "through chain",
-			comp: func() *Button {
-				return New().
-					WithID("zing").
-					WithClasses("foo").
-					WithAttributes(map[string]any{"data-zed": "zung"}).
-					WithKind(KindSubmit).
-					WithDisabled().
-					WithFunction(func(el *Button) error {
-						el.ClassNames = append(el.ClassNames, "bar")
-						return nil
-					})
-			},
-			assertTarget: `button#zing.foo.bar[type="submit"][disabled][data-zed="zung"]`,
-		}, {
-			name: "through argument spread",
+			name: "creates",
 			comp: func() *Button {
 				return New(
 					WithID("zing"),
@@ -38,9 +23,8 @@ func TestNew(t *testing.T) {
 					WithAttributes(map[string]any{"data-zed": "zung"}),
 					WithKind(KindSubmit),
 					WithDisabled(),
-					func(el *Button) error {
+					func(el *Button) {
 						el.ClassNames = append(el.ClassNames, "bar")
-						return nil
 					},
 				)
 			},
