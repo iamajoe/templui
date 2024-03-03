@@ -33,7 +33,7 @@ func (b *Button) WithClasses(classes ...string) *Button {
 	return b
 }
 
-func (b *Button) WithCustomFn(fn func(*Button) error) *Button {
+func (b *Button) WithCustom(fn func(*Button) error) *Button {
 	// TODO: what to do with the error?
 	_ = fn(b)
 	return b
