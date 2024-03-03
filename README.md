@@ -40,10 +40,10 @@ You can still construct the properties manually by providing the right custom fu
 ### Button
 
 ```go
-@ui.Button(
-    ui.ButtonOpts.WithType(ui.ButtonTypeSubmit),
-    ui.ButtonOpts.WithDisabled(),
-    ui.ButtonOpts.WithClasses("foo"),
+@button.New()
+    WithKind(button.KindSubmit).
+    WithDisabled().
+    WithClasses("foo")
 )
 ```
 
