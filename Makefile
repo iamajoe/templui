@@ -15,7 +15,7 @@ install: ## Install dependencies
 	@$(GOCMD) mod download
 
 build: ## Builds templ files
-	@templ generate -path elements/
+	@templ generate -path ui/
 
 test: ## Run the tests of the project
 	@make vet
