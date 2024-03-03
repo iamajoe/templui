@@ -10,7 +10,7 @@ go install github.com/iamajoe/templui
 
 ## Documentation
 
-Components are nested under the `elements` package:
+Components are nested under the `ui` package:
 ```go
 import "github.com/iamajoe/templui/ui"
 ```
