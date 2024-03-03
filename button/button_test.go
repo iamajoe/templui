@@ -8,14 +8,17 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func TestButton(t *testing.T) {
+func TestNew(t *testing.T) {
 	cases := [](struct {
+		name         string
 		comp         func() *Button
 		assertTarget string
 	}){
 		{
+			name: "through chain",
 			comp: func() *Button {
 				return New().
+					WithID("zing").
 					WithKind(KindSubmit).
 					WithDisabled().
 					WithClasses("foo").
@@ -24,10 +27,12 @@ func TestButton(t *testing.T) {
 						return nil
 					})
 			},
-			assertTarget: `button.foo.bar[type="submit"][disabled]`,
+			assertTarget: `button#zing.foo.bar[type="submit"][disabled]`,
 		}, {
+			name: "through argument spread",
 			comp: func() *Button {
 				return New(
+					WithID("zing"),
 					WithKind(KindSubmit),
 					WithDisabled(),
 					WithClasses("foo"),
@@ -37,7 +42,7 @@ func TestButton(t *testing.T) {
 					},
 				)
 			},
-			assertTarget: `button.foo.bar[type="submit"][disabled]`,
+			assertTarget: `button#zing.foo.bar[type="submit"][disabled]`,
 		},
 	}
 
@@ -50,18 +55,15 @@ func TestButton(t *testing.T) {
 			w.Close()
 		}()
 
-		doc, err := goquery.NewDocumentFromReader(r)
-		if err != nil {
-			t.Fatalf("failed to read template: %v", err)
-		}
-
-		docHTML, err := doc.Html()
-		if err != nil {
-			t.Fatalf("failed to return html: %v", err)
-		}
-
+		doc, _ := goquery.NewDocumentFromReader(r)
 		if doc.Find(test.assertTarget).Length() == 0 {
-			t.Fatalf("expected button to render with attributes: %s", docHTML)
+			body, _ := doc.Find("body").Html()
+			t.Fatalf(
+				"%s: expected target \"%s\" to be in html \"%s\"",
+				test.name,
+				test.assertTarget,
+				body,
+			)
 		}
 	}
 }

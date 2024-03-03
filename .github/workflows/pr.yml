@@ -1,0 +1,13 @@
+name: pr
+
+on:
+ pull_request:
+    branches:
+    - main
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+
+  pr:
+    needs: tests
