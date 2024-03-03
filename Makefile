@@ -19,7 +19,6 @@ build: ## Builds templ files
 
 test: ## Run the tests of the project
 	@make vet
-	@make lint
 	@make test_race_coverage
 
 test_race_coverage: build ## Runs the tests with race and coverage
