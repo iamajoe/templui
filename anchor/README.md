@@ -13,9 +13,8 @@ import "github.com/iamajoe/templui/anchor"
     WithAttributes(map[string]any{"data-zed": "zung"}),
     WithTarget(TargetBlank),
     WithHref("https://google.com"),
-    func(c *Anchor) error {
+    func(c *Anchor) {
         c.ClassNames = append(c.ClassNames, "bar")
-        return nil
     },
 )
 ```

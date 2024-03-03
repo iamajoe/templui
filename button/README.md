@@ -13,9 +13,8 @@ import "github.com/iamajoe/templui/button"
     WithAttributes(map[string]any{"data-zed": "zung"}),
     WithKind(button.KindSubmit),
     WithDisabled(),
-    func(c *button.Button) error {
+    func(c *button.Button) {
         c.ClassNames = append(c.ClassNames, "bar")
-        return nil
     },
 )
 ```
