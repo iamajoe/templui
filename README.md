@@ -21,6 +21,23 @@ Or spread the options under the arguments
 @button.New(WithID("zing"))
 ```
 
+### Extending
+
+You can easily extend the component to be able to use them throughout your project by wrapping them in a function.
+
+```go
+func ProjectButton(id string, color string) templ.Component {
+    return button.New().
+        WithClasses("bg-" + color).
+        WithAttributes(map[string]any{"data-id": id}).
+        WithKind(button.KindSubmit)
+}
+
+@ProjectButton("indigo-500")
+```
+
+## Components
+
 ### Anchor
 
 ```go
