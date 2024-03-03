@@ -38,37 +38,8 @@ func ProjectButton(id string, color string) templ.Component {
 
 ## Components
 
-### Anchor
-
-```go
-import "github.com/iamajoe/templui/button"
-@anchor.New(
-    WithID("zing").
-    WithClasses("foo").
-    WithAttributes(map[string]any{"data-zed": "zung"}).
-    WithTarget(TargetBlank).
-    WithHref("https://google.com").
-    WithFunction(func(c *Anchor) error {
-        c.ClassNames = append(c.ClassNames, "bar")
-        return nil
-    })
-```
-
-### Button
-
-```go
-import "github.com/iamajoe/templui/button"
-@button.New().
-    WithID("zing").
-    WithClasses("foo").
-    WithAttributes(map[string]any{"data-zed": "zung"}).
-    WithKind(button.KindSubmit).
-    WithDisabled().
-    WithFunction(func(c *button.Button) error {
-        c.ClassNames = append(c.ClassNames, "bar")
-        return nil
-    })
-```
+- [Anchor](./anchor)
+- [Button](./button)
 
 ## Development
 
