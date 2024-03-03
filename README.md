@@ -10,6 +10,17 @@ go install github.com/iamajoe/templui
 
 ## Documentation
 
+The components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
+
+You can either use chaining:
+```go
+@button.New().WithID("zing")
+```
+Or spread the options under the arguments
+```go
+@button.New(WithID("zing"))
+```
+
 ### Anchor
 
 ```go
@@ -26,7 +37,7 @@ go install github.com/iamajoe/templui
 ```go
 import "github.com/iamajoe/templui/button"
 
-@button.New()
+@button.New().
     WithID("zing").
     WithClasses("foo").
     WithAttributes(map[string]any{"data-zed": "zung"}).
@@ -42,8 +53,7 @@ import "github.com/iamajoe/templui/button"
 
 ### Build
 
-Whenever a `.templ` file is changed, a build needs to happen so it can generate the `.go` file.
-
+Whenever a `.templ` file is changed, the `.go` file according to that component needs to be generated. You can do so with:
 ```sh
 make build
 ```
@@ -56,23 +66,24 @@ make test
 
 ## TODO
 
-- [ ]: Radio
-- [ ]: Checkbox
-- [ ]: Toggle
-- [ ]: Select
-- [ ]: Input
-- [ ]: Form group
-- [ ]: Alert
-- [ ]: Badge
-- [ ]: Card
-- [ ]: Dialog
-- [ ]: Progress
-- [ ]: Menubar
-- [ ]: Avatar
-- [ ]: Dropdown menu
-- [ ]: Tooltip
-- [ ]: Pagination
-- [ ]: Separator
-- [ ]: Slider
-- [ ]: Table
-- [ ]: Themes
+- [ ] Radio
+- [ ] Checkbox
+- [ ] Toggle
+- [ ] Select
+- [ ] Input
+- [ ] Form group
+- [ ] Alert
+- [ ] Badge
+- [ ] Card
+- [ ] Dialog
+- [ ] Progress
+- [ ] Menubar
+- [ ] Avatar
+- [ ] Dropdown menu
+- [ ] Tooltip
+- [ ] Pagination
+- [ ] Separator
+- [ ] Slider
+- [ ] Table
+- [ ] Themes
+- [ ] Styleguide
