@@ -1,0 +1,27 @@
+package button
+
+import (
+	"strings"
+)
+
+templ render(props Button) {
+	<button
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		if len(props.Kind) == 0 {
+			type="submit"
+		} else {
+			type={ string(props.Kind) }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Disabled {
+			disabled
+		}
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	>
+		{ children... }
+	</button>
+}

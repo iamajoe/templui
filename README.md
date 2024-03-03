@@ -10,49 +10,58 @@ go install github.com/iamajoe/templui
 
 ## Documentation
 
-Components are nested under the `ui` package:
-```go
-import "github.com/iamajoe/templui/ui"
-```
-
-These components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
-You can still construct the properties manually by providing the right custom function of the builder pattern:
-```go
-@ui.Anchor(
-    func(p *ui.AnchorProps) error {
-        p.ClassNames = append(p.ClassNames, "bar")
-        return nil
-    },
-)
-```
-
-### Anchor
+The components are built under `builder pattern`. As such, You construct the elements as you see fit without accessing the properties directly.
 
 ```go
-@ui.Anchor(
-    ui.AnchorOpts.WithTarget(ui.AnchorTargetBlank),
-    ui.AnchorOpts.WithHref("https://google.com"),
-    ui.AnchorOpts.WithDisabled(),
-    ui.AnchorOpts.WithClasses("foo"),
-)
+@button.New(WithID("zing"), WithClasses("bg-indigo-500"))
 ```
 
-### Button
+### Extending
+
+You can easily extend the component to be able to use them throughout your project by wrapping them in a function.
 
 ```go
-@ui.Button(
-    ui.ButtonOpts.WithType(ui.ButtonTypeSubmit),
-    ui.ButtonOpts.WithDisabled(),
-    ui.ButtonOpts.WithClasses("foo"),
-)
+func ProjectButton(id string, color string) templ.Component {
+    return button.New(
+        WithClasses("bg-" + color),
+        WithAttributes(map[string]any{"data-id": id}),
+        WithKind(button.KindSubmit),
+    )
+}
+
+@ProjectButton("indigo-500")
 ```
+
+Or you could for example create a props slice depending on incoming data:
+
+```go
+func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
+    opts := []button.OptsFn {
+        WithClasses("bg-" + color),
+        WithAttributes(map[string]any{"data-id": id}),
+        WithKind(button.KindSubmit),
+    }
+
+    if disabled {
+        opts = append(opts, WithClasses("pointer-events-none"))
+    }
+
+    return opts
+}
+
+@button.New(GetButtonProps("zed", "indigo-500", true)...)
+```
+
+## Components
+
+- [Anchor](./anchor)
+- [Button](./button)
 
 ## Development
 
 ### Build
 
-Whenever a `.templ` file is changed, a build needs to happen so it can generate the `.go` file.
-
+Whenever a `.templ` file is changed, the `.go` file according to that component needs to be generated. You can do so with:
 ```sh
 make build
 ```
@@ -65,23 +74,24 @@ make test
 
 ## TODO
 
-- [ ]: Radio
-- [ ]: Checkbox
-- [ ]: Toggle
-- [ ]: Select
-- [ ]: Input
-- [ ]: Form group
-- [ ]: Alert
-- [ ]: Badge
-- [ ]: Card
-- [ ]: Dialog
-- [ ]: Progress
-- [ ]: Menubar
-- [ ]: Avatar
-- [ ]: Dropdown menu
-- [ ]: Tooltip
-- [ ]: Pagination
-- [ ]: Separator
-- [ ]: Slider
-- [ ]: Table
-- [ ]: Themes
+- [ ] Radio
+- [ ] Checkbox
+- [ ] Toggle
+- [ ] Select
+- [ ] Input
+- [ ] Form group
+- [ ] Alert
+- [ ] Badge
+- [ ] Card
+- [ ] Dialog
+- [ ] Progress
+- [ ] Menubar
+- [ ] Avatar
+- [ ] Dropdown menu
+- [ ] Tooltip
+- [ ] Pagination
+- [ ] Separator
+- [ ] Slider
+- [ ] Table
+- [ ] Themes
+- [ ] Styleguide
