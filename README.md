@@ -48,8 +48,8 @@ import "github.com/iamajoe/templui/button"
     WithAttributes(map[string]any{"data-zed": "zung"}).
     WithTarget(TargetBlank).
     WithHref("https://google.com").
-    WithFunction(func(el *Anchor) error {
-        el.ClassNames = append(el.ClassNames, "bar")
+    WithFunction(func(c *Anchor) error {
+        c.ClassNames = append(c.ClassNames, "bar")
         return nil
     })
 ```
@@ -64,8 +64,8 @@ import "github.com/iamajoe/templui/button"
     WithAttributes(map[string]any{"data-zed": "zung"}).
     WithKind(button.KindSubmit).
     WithDisabled().
-    WithFunction(func(el *button.Button) error {
-        el.ClassNames = append(el.ClassNames, "bar")
+    WithFunction(func(c *button.Button) error {
+        c.ClassNames = append(c.ClassNames, "bar")
         return nil
     })
 ```
