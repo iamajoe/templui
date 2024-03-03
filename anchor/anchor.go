@@ -1,4 +1,4 @@
-package button
+package anchor
 
 import (
 	"context"
@@ -7,43 +7,45 @@ import (
 	"github.com/a-h/templ"
 )
 
-type Kind string
+type Target string
 
 const (
-	KindSubmit Kind = "submit"
-	KindButton Kind = "button"
+	TargetSelf   Target = "_self"
+	TargetParent Target = "_parent"
+	TargetTop    Target = "_top"
+	TargetBlank  Target = "_blank"
 )
 
 type (
-	OptsFn func(*Button) error
-	Button struct {
+	OptsFn func(*Anchor) error
+	Anchor struct {
 		ID         string
 		ClassNames []string
 		Attributes templ.Attributes
 
-		Disabled bool
-		Kind     Kind
+		Href   string
+		Target Target
 
 		Opts []OptsFn
 	}
 )
 
 func WithID(id string) OptsFn {
-	return func(element *Button) error {
+	return func(element *Anchor) error {
 		element.ID = id
 		return nil
 	}
 }
 
 func WithClasses(classes ...string) OptsFn {
-	return func(element *Button) error {
+	return func(element *Anchor) error {
 		element.ClassNames = append(element.ClassNames, classes...)
 		return nil
 	}
 }
 
 func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *Button) error {
+	return func(element *Anchor) error {
 		if element.Attributes == nil {
 			element.Attributes = make(map[string]any)
 		}
@@ -56,51 +58,51 @@ func WithAttributes(attributes map[string]any) OptsFn {
 	}
 }
 
-func WithDisabled() OptsFn {
-	return func(element *Button) error {
-		element.Disabled = true
+func WithHref(href string) OptsFn {
+	return func(element *Anchor) error {
+		element.Href = href
 		return nil
 	}
 }
 
-func WithKind(kind Kind) OptsFn {
-	return func(element *Button) error {
-		element.Kind = kind
+func WithTarget(target Target) OptsFn {
+	return func(element *Anchor) error {
+		element.Target = target
 		return nil
 	}
 }
 
-func (c *Button) WithFunction(fn func(*Button) error) *Button {
+func (c *Anchor) WithFunction(fn func(*Anchor) error) *Anchor {
 	c.Opts = append(c.Opts, fn)
 	return c
 }
 
-func (c *Button) WithID(id string) *Button {
+func (c *Anchor) WithID(id string) *Anchor {
 	c.Opts = append(c.Opts, WithID(id))
 	return c
 }
 
-func (c *Button) WithClasses(classes ...string) *Button {
+func (c *Anchor) WithClasses(classes ...string) *Anchor {
 	c.Opts = append(c.Opts, WithClasses(classes...))
 	return c
 }
 
-func (c *Button) WithAttributes(attributes map[string]any) *Button {
+func (c *Anchor) WithAttributes(attributes map[string]any) *Anchor {
 	c.Opts = append(c.Opts, WithAttributes(attributes))
 	return c
 }
 
-func (c *Button) WithDisabled() *Button {
-	c.Opts = append(c.Opts, WithDisabled())
+func (c *Anchor) WithHref(href string) *Anchor {
+	c.Opts = append(c.Opts, WithHref(href))
 	return c
 }
 
-func (c *Button) WithKind(kind Kind) *Button {
-	c.Opts = append(c.Opts, WithDisabled())
+func (c *Anchor) WithTarget(target Target) *Anchor {
+	c.Opts = append(c.Opts, WithTarget(target))
 	return c
 }
 
-func (c *Button) Render(ctx context.Context, w io.Writer) error {
+func (c *Anchor) Render(ctx context.Context, w io.Writer) error {
 	for _, opt := range c.Opts {
 		if err := opt(c); err != nil {
 			// TODO: need to figure how to handle errors
@@ -111,8 +113,8 @@ func (c *Button) Render(ctx context.Context, w io.Writer) error {
 	return render(*c).Render(ctx, w)
 }
 
-func New(opts ...OptsFn) *Button {
-	return &Button{
+func New(opts ...OptsFn) *Anchor {
+	return &Anchor{
 		Opts: opts,
 	}
 }

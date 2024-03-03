@@ -1,18 +1,21 @@
-package ui
+package anchor
 
 import (
 	"strings"
 )
 
-templ anchorTmpl(props AnchorProps) {
+templ render(props Anchor) {
 	<a
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
 		href={ templ.URL(props.Href) }
 		class={ strings.Join(props.ClassNames, " "), }
 		if len(props.Target) > 0 {
 			target={ string(props.Target) }
 		}
-		if props.Disabled {
-			disabled
+		if props.Attributes != nil {
+			{ props.Attributes... }
 		}
 	>
 		{ children... }

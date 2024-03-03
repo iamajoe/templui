@@ -41,19 +41,23 @@ func ProjectButton(id string, color string) templ.Component {
 ### Anchor
 
 ```go
-@ui.Anchor(
-    ui.AnchorOpts.WithTarget(ui.AnchorTargetBlank),
-    ui.AnchorOpts.WithHref("https://google.com"),
-    ui.AnchorOpts.WithDisabled(),
-    ui.AnchorOpts.WithClasses("foo"),
-)
+import "github.com/iamajoe/templui/button"
+@anchor.New(
+    WithID("zing").
+    WithClasses("foo").
+    WithAttributes(map[string]any{"data-zed": "zung"}).
+    WithTarget(TargetBlank).
+    WithHref("https://google.com").
+    WithFunction(func(el *Anchor) error {
+        el.ClassNames = append(el.ClassNames, "bar")
+        return nil
+    })
 ```
 
 ### Button
 
 ```go
 import "github.com/iamajoe/templui/button"
-
 @button.New().
     WithID("zing").
     WithClasses("foo").
