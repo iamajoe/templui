@@ -13,11 +13,11 @@ var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
 		usage: `
-@New(
-  WithID("zing"),
-  WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-  WithAttributes(map[string]any{ "data-zed": "zung" }),
-  WithKind(KindSubmit),
+@button.New(
+  button.WithID("zing"),
+  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
+  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
+  button.WithKind(KindSubmit),
 ) { Button }
     `,
 		opts: []OptsFn{
