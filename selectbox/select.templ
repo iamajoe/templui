@@ -1,0 +1,33 @@
+package selectbox
+
+import (
+	"strings"
+)
+
+// TODO: need to handle search based?! dataset?! choices?
+templ render(props SelectBox) {
+	<select
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		if len(props.Name) > 0 {
+			name={ props.Name }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Required {
+			required
+		}
+		if props.Disabled {
+			disabled
+		}
+	>
+		for _, item := range props.Items {
+			<option
+				value={ item.Value }
+				if item.Selected || props.Selected == item.Value {
+					selected
+				}
+			>{ item.Label }</option>
+		}
+	</select>
+}
