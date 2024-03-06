@@ -1,0 +1,39 @@
+package inputDate
+
+import (
+	"strings"
+)
+
+templ render(props InputDate) {
+	<input
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		type="date"
+		if props.Value != nil {
+			value={ props.Value.Format("2006-01-02") }
+		}
+		placeholder={ props.Placeholder }
+		if len(props.Name) > 0 {
+			autocomplete={ props.Name }
+			autocorrect="off"
+			name={ props.Name }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Disabled {
+			disabled
+		}
+		if props.Min != nil {
+			min={ props.Min.Format("2006-01-02") }
+		}
+		if props.Max != nil {
+			max={ props.Max.Format("2006-01-02") }
+		}
+		if props.Required {
+			required
+		}
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	/>
+}

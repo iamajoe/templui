@@ -1,4 +1,4 @@
-package button
+package anchor
 
 import "github.com/iamajoe/templui/utils"
 
@@ -13,20 +13,20 @@ var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
 		usage: `
-@button.New(
-  button.WithID("zing"),
-  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
-  // button.WithDisabled(),
-  button.WithKind(KindSubmit),
-) { Button }
+@anchor.New(
+  anchor.WithID("zing"),
+  anchor.WithClasses("underline"),
+  anchor.WithAttributes(map[string]any{"data-zed": "zung"}),
+  anchor.WithTarget(anchor.TargetBlank),
+  anchor.WithHref("https://google.com"),
+) { Anchor }
     `,
 		opts: []OptsFn{
 			WithID("zing"),
-			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
+			WithClasses("underline"),
 			WithAttributes(map[string]any{"data-zed": "zung"}),
-			// button.WithDisabled(),
-			WithKind(KindSubmit),
+			WithTarget(TargetBlank),
+			WithHref("https://google.com"),
 		},
 	},
 }
@@ -35,7 +35,7 @@ templ Styleguide() {
 	for _, component := range styleguideItems {
 		@utils.Item(component.title, component.description, component.usage) {
 			@New(component.opts...) {
-				Button 
+				Anchor 
 			}
 		}
 	}

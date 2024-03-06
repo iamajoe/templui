@@ -1,0 +1,56 @@
+package inputDate
+
+import (
+	"github.com/iamajoe/templui/utils"
+	"time"
+)
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptsFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: `
+@inputDate.New(
+    inputDate.WithID("zing"),
+    inputDate.WithClasses("foo"),
+    inputDate.WithAttributes(map[string]any{"data-zed": "zung"}),
+    // inputDate.WithDisabled(),
+    inputDate.WithRequired(),
+    inputDate.WithName("start-date"),
+    inputDate.WithValue(time.Now()),
+    inputDate.WithPlaceholder("Set your start date"),
+    inputDate.WithMin(time.Now()),
+    inputDate.WithMax(time.Now()),
+    func(c *inputDate.InputDate) {
+        c.ClassNames = append(c.ClassNames, "bar")
+    },
+)
+    `,
+		opts: []OptsFn{
+			WithID("zing"),
+			WithClasses("foo"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			// WithDisabled(),
+			WithRequired(),
+			WithName("start-date"),
+			WithValue(time.Now()),
+			WithPlaceholder("Set your start date"),
+			WithMin(time.Now()),
+			WithMax(time.Now()),
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...)
+		}
+	}
+}

@@ -1,0 +1,43 @@
+package inputNumber
+
+import (
+	"strings"
+	"strconv"
+)
+
+templ render(props InputNumber) {
+	<input
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		type="number"
+		if props.Value != nil {
+			value={ strconv.Itoa(*props.Value) }
+		}
+		placeholder={ props.Placeholder }
+		if len(props.Name) > 0 {
+			autocomplete={ props.Name }
+			autocorrect="off"
+			name={ props.Name }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Disabled {
+			disabled
+		}
+		if props.Min != nil {
+			min={ strconv.Itoa(*props.Min) }
+		}
+		if props.Max != nil {
+			max={ strconv.Itoa(*props.Max) }
+		}
+		if props.Step != nil {
+			step={ strconv.Itoa(*props.Step) }
+		}
+		if props.Required {
+			required
+		}
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	/>
+}
