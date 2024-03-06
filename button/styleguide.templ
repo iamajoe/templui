@@ -1,0 +1,40 @@
+package button
+
+import "github.com/iamajoe/templui/utils"
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptsFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: `
+@button.New(
+  button.WithID("zing"),
+  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
+  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
+  button.WithKind(KindSubmit),
+) { Button }
+    `,
+		opts: []OptsFn{
+			WithID("zing"),
+			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			WithKind(KindSubmit),
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...) {
+				Button 
+			}
+		}
+	}
+}

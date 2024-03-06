@@ -1,0 +1,74 @@
+package main
+
+templ layout(activeUrl string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<script src="https://cdn.tailwindcss.com"></script>
+			<title>TemplUI</title>
+		</head>
+		<body>
+			<div class="flex flex-col h-screen">
+				<div class="flex justify-between items-center flex-shrink-0 px-10 py-4 text-sm border-b border-b-gray-200">
+					<a href="/" class="text-2xl">TemplUI</a>
+				</div>
+				<div class="flex flex-grow">
+					<div class="w-72 px-6 bg-white flex-col space-y-4 text-sm border-r border-r-gray-200 py-6">
+						@menuLevel(rootSideMenu, 0, activeUrl)
+					</div>
+					<div class="relative flex-1 pl-10 pr-16 py-6">
+						{ children... }
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+}
+
+templ menuLevel(item MenuItem, level int, activeUrl string) {
+	if len(item.Items) > 0 {
+		if item.Label != "" {
+			<div class="text-gray-400 text-sm mb-1">{ item.Label }</div>
+		}
+		<div class="flex flex-col space-y-2">
+			for _, item := range item.Items {
+				@menuLevel(item, level+1, activeUrl)
+			}
+		</div>
+	} else if item.Label == "" {
+		<div class="shrink-0 bg-grey-200 h-[1px] w-full"></div>
+	} else {
+		<a
+			class={
+				"px-2 py-2 items-center box-border no-underline font-semibold text-black rounded-md",
+				templ.KV("bg-white", activeUrl != item.Route),
+				templ.KV("bg-gray-200", activeUrl == item.Route),
+			}
+			href={ templ.URL(item.Route) }
+		>
+			<div>{ item.Label }</div>
+		</a>
+	}
+}
+
+templ renderRoot() {
+	@layout("/") {
+		<div class="mb-6">
+			<h1 class="text-2xl font-semibold tracking-light">Welcome</h1>
+		</div>
+	}
+}
+
+templ renderItem(title string, description string, activeUrl string, item templ.Component) {
+	@layout(activeUrl) {
+		<div class="mb-6">
+			<h1 class="text-2xl font-semibold tracking-light">{ title }</h1>
+			if len(description) > 0 {
+				<span class="text-gray-500 text-sm">{ description }</span>
+			}
+		</div>
+		@item
+	}
+}

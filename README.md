@@ -19,6 +19,14 @@ The components are built under `functional options pattern`. As such, You constr
 )
 ```
 
+### Styleguide
+
+A styleguide is provided with the components of the library and its usage.
+
+```bash
+make styleguide
+```
+
 ### Extending
 
 You can easily extend the component to be able to use them throughout your project by wrapping them in a function.

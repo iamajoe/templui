@@ -16,6 +16,7 @@ install: ## Install dependencies
 
 build: ## Builds templ files
 	@templ generate -path ./
+	@templ generate -f ./_example/main.templ
 
 test: ## Run the tests of the project
 	@make vet
@@ -31,6 +32,10 @@ lint: ## Lints the project
 	golines -w -l .
 	goimports -w -l .
 	gofumpt -l -w .
+
+styleguide: build ## Runs styleguide server
+	@templ generate -f ./_styleguide/main.templ
+	@cd _styleguide && go run .
 
 help: ## Show this help.
 	@echo ''
