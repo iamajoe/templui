@@ -1,48 +1,48 @@
-package inputNumber
+package inputdate
 
 import (
 	"context"
 	"io"
+	"time"
 
 	"github.com/a-h/templ"
 )
 
 type (
-	OptsFn      func(*InputNumber)
-	InputNumber struct {
+	OptsFn    func(*InputDate)
+	InputDate struct {
 		ID         string
 		ClassNames []string
 		Attributes templ.Attributes
 
 		Disabled    bool
 		Required    bool
-		Value       *int
-		Placeholder string
 		Name        string
-		Min         *int
-		Max         *int
-		Step        *int
+		Placeholder string
+		Value       *time.Time
+		Min         *time.Time
+		Max         *time.Time
 	}
 )
 
-func (c InputNumber) Render(ctx context.Context, w io.Writer) error {
+func (c InputDate) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
 func WithID(id string) OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.ID = id
 	}
 }
 
 func WithClasses(classes ...string) OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.ClassNames = append(element.ClassNames, classes...)
 	}
 }
 
 func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		if element.Attributes == nil {
 			element.Attributes = make(map[string]any)
 		}
@@ -54,55 +54,49 @@ func WithAttributes(attributes map[string]any) OptsFn {
 }
 
 func WithDisabled() OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.Disabled = true
 	}
 }
 
 func WithName(name string) OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.Name = name
 	}
 }
 
 func WithRequired() OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.Required = true
 	}
 }
 
-func WithValue(value int) OptsFn {
-	return func(element *InputNumber) {
-		element.Value = &value
+func WithValue(date time.Time) OptsFn {
+	return func(element *InputDate) {
+		element.Value = &date
 	}
 }
 
 func WithPlaceholder(placeholder string) OptsFn {
-	return func(element *InputNumber) {
+	return func(element *InputDate) {
 		element.Placeholder = placeholder
 	}
 }
 
-func WithMin(min int) OptsFn {
-	return func(element *InputNumber) {
-		element.Min = &min
+func WithMin(date time.Time) OptsFn {
+	return func(element *InputDate) {
+		element.Min = &date
 	}
 }
 
-func WithMax(max int) OptsFn {
-	return func(element *InputNumber) {
-		element.Max = &max
+func WithMax(date time.Time) OptsFn {
+	return func(element *InputDate) {
+		element.Max = &date
 	}
 }
 
-func WithStep(step int) OptsFn {
-	return func(element *InputNumber) {
-		element.Step = &step
-	}
-}
-
-func New(opts ...OptsFn) InputNumber {
-	var c InputNumber
+func New(opts ...OptsFn) InputDate {
+	var c InputDate
 	for _, opt := range opts {
 		opt(&c)
 	}

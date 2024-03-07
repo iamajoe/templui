@@ -67,8 +67,8 @@ func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
 
 - [Anchor](./anchor)
 - [Button](./button)
-- [Input date](./inputDate)
-- [Input number](./inputNumber)
+- [Input date](./inputdate)
+- [Input number](./inputnumber)
 
 ## Development
 
@@ -87,11 +87,13 @@ make test
 
 ## TODO
 
+- [ ] Input text
+- [ ] Input ???
+- [ ] Table
 - [ ] Radio
 - [ ] Checkbox
 - [ ] Toggle
 - [ ] Select
-- [ ] Input
 - [ ] Form group
 - [ ] Alert
 - [ ] Badge
@@ -105,6 +107,16 @@ make test
 - [ ] Pagination
 - [ ] Separator
 - [ ] Slider
-- [ ] Table
-- [ ] Themes
-- [ ] Styleguide
+- [ ] Themes 
+  - color-scheme: light/dark system scheme
+  - global variables
+  - scoped css?!
+  - scoped js?!
+  - themes based on common colorschemes: monokai, dracula, catpuccin...
+- [ ] Styleguide prettify
+- [ ] Test test test
+
+### References
+
+- https://eui.elastic.co/
+- https://ui.shadcn.com/
