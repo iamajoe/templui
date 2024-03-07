@@ -23,9 +23,9 @@ func TestNew(t *testing.T) {
 					WithAttributes(map[string]any{"data-zed": "zung"}),
 					WithTarget(TargetBlank),
 					WithHref("https://google.com"),
-					func(el *Anchor) {
+					OptFn(func(el *Anchor) {
 						el.ClassNames = append(el.ClassNames, "bar")
-					},
+					}),
 				)
 			},
 			assertTarget: `a#zing.foo.bar[href="https://google.com"][target="_blank"][data-zed="zung"]`,

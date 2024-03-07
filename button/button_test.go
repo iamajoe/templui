@@ -23,9 +23,9 @@ func TestNew(t *testing.T) {
 					WithAttributes(map[string]any{"data-zed": "zung"}),
 					WithKind(KindSubmit),
 					WithDisabled(),
-					func(el *Button) {
+					OptFn(func(el *Button) {
 						el.ClassNames = append(el.ClassNames, "bar")
-					},
+					}),
 				)
 			},
 			assertTarget: `button#zing.foo.bar[type="submit"][disabled][data-zed="zung"]`,

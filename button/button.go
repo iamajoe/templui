@@ -4,72 +4,63 @@ import (
 	"context"
 	"io"
 
-	"github.com/a-h/templ"
+	"github.com/iamajoe/templui"
 )
 
-type (
-	OptsFn func(*Button)
-	Button struct {
-		ID         string
-		ClassNames []string
-		Attributes templ.Attributes
+type Opt interface {
+	ButtonOpt()
+}
 
-		Disabled bool
-		Kind     Kind
-	}
-	Kind string
-)
+type OptFn func(*Button)
+
+func (OptFn) ButtonOpt() {}
+
+type Kind string
 
 const (
 	KindSubmit Kind = "submit"
 	KindButton Kind = "button"
 )
 
+func New(opts ...Opt) Button {
+	var c Button
+	for _, opt := range opts {
+		switch fn := opt.(type) {
+		case templui.OptFn:
+			fn(&c.Element)
+		case OptFn:
+			fn(&c)
+		}
+	}
+
+	return c
+}
+
+type Button struct {
+	templui.Element
+
+	Disabled bool
+	Kind     Kind
+}
+
 func (c Button) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithID(id string) OptsFn {
-	return func(element *Button) {
-		element.ID = id
-	}
-}
+var WithID = templui.WithID
 
-func WithClasses(classes ...string) OptsFn {
-	return func(element *Button) {
-		element.ClassNames = append(element.ClassNames, classes...)
-	}
-}
+var WithClasses = templui.WithClasses
 
-func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *Button) {
-		if element.Attributes == nil {
-			element.Attributes = make(map[string]any)
-		}
+var WithAttributes = templui.WithAttributes
 
-		for k, v := range attributes {
-			element.Attributes[k] = v
-		}
-	}
-}
-
-func WithDisabled() OptsFn {
+func WithDisabled() OptFn {
 	return func(element *Button) {
 		element.Disabled = true
 	}
 }
 
-func WithKind(kind Kind) OptsFn {
+func WithKind(kind Kind) OptFn {
 	return func(element *Button) {
 		element.Kind = kind
 	}
-}
-
-func New(opts ...OptsFn) Button {
-	var c Button
-	for _, opt := range opts {
-		opt(&c)
-	}
-
-	return c
 }

@@ -67,8 +67,8 @@ func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
 
 - [Anchor](./anchor)
 - [Button](./button)
-- [Input date](./inputDate)
-- [Input number](./inputNumber)
+- [Input date](./inputdate)
+- [Input number](./inputnumber)
 
 ## Development
 

@@ -4,21 +4,18 @@ import (
 	"context"
 	"io"
 
-	"github.com/a-h/templ"
+	"github.com/iamajoe/templui"
 )
 
-type (
-	OptsFn func(*Anchor)
-	Anchor struct {
-		ID         string
-		ClassNames []string
-		Attributes templ.Attributes
+type Opt interface {
+	AnchorOpt()
+}
 
-		Href   string
-		Target Target
-	}
-	Target string
-)
+type OptFn func(*Anchor)
+
+func (OptFn) AnchorOpt() {}
+
+type Target string
 
 const (
 	TargetSelf   Target = "_self"
@@ -27,51 +24,45 @@ const (
 	TargetBlank  Target = "_blank"
 )
 
+func New(opts ...Opt) Anchor {
+	var c Anchor
+	for _, opt := range opts {
+		switch fn := opt.(type) {
+		case templui.OptFn:
+			fn(&c.Element)
+		case OptFn:
+			fn(&c)
+		}
+	}
+
+	return c
+}
+
+type Anchor struct {
+	templui.Element
+
+	Href   string
+	Target Target
+}
+
 func (c Anchor) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithID(id string) OptsFn {
-	return func(element *Anchor) {
-		element.ID = id
-	}
-}
+var WithID = templui.WithID
 
-func WithClasses(classes ...string) OptsFn {
-	return func(element *Anchor) {
-		element.ClassNames = append(element.ClassNames, classes...)
-	}
-}
+var WithClasses = templui.WithClasses
 
-func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *Anchor) {
-		if element.Attributes == nil {
-			element.Attributes = make(map[string]any)
-		}
+var WithAttributes = templui.WithAttributes
 
-		for k, v := range attributes {
-			element.Attributes[k] = v
-		}
-	}
-}
-
-func WithHref(href string) OptsFn {
+func WithHref(href string) OptFn {
 	return func(element *Anchor) {
 		element.Href = href
 	}
 }
 
-func WithTarget(target Target) OptsFn {
+func WithTarget(target Target) OptFn {
 	return func(element *Anchor) {
 		element.Target = target
 	}
-}
-
-func New(opts ...OptsFn) Anchor {
-	var c Anchor
-	for _, opt := range opts {
-		opt(&c)
-	}
-
-	return c
 }
