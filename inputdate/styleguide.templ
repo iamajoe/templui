@@ -1,4 +1,4 @@
-package inputDate
+package inputdate
 
 import (
 	"github.com/iamajoe/templui/utils"
@@ -16,18 +16,18 @@ var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
 		usage: `
-@inputDate.New(
-    inputDate.WithID("zing"),
-    inputDate.WithClasses("foo"),
-    inputDate.WithAttributes(map[string]any{"data-zed": "zung"}),
-    // inputDate.WithDisabled(),
-    inputDate.WithRequired(),
-    inputDate.WithName("start-date"),
-    inputDate.WithValue(time.Now()),
-    inputDate.WithPlaceholder("Set your start date"),
-    inputDate.WithMin(time.Now()),
-    inputDate.WithMax(time.Now()),
-    func(c *inputDate.InputDate) {
+@inputdate.New(
+    inputdate.WithID("zing"),
+    inputdate.WithClasses("foo"),
+    inputdate.WithAttributes(map[string]any{"data-zed": "zung"}),
+    // inputdate.WithDisabled(),
+    inputdate.WithRequired(),
+    inputdate.WithName("start-date"),
+    inputdate.WithValue(time.Now()),
+    inputdate.WithPlaceholder("Set your start date"),
+    inputdate.WithMin(time.Now()),
+    inputdate.WithMax(time.Now()),
+    func(c *inputdate.InputDate) {
         c.ClassNames = append(c.ClassNames, "bar")
     },
 )

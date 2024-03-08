@@ -9,8 +9,8 @@ import (
 
 	"github.com/iamajoe/templui/anchor"
 	"github.com/iamajoe/templui/button"
-	"github.com/iamajoe/templui/inputDate"
-	"github.com/iamajoe/templui/inputNumber"
+	"github.com/iamajoe/templui/inputdate"
+	"github.com/iamajoe/templui/inputnumber"
 )
 
 //go:generate go run github.com/a-h/templ/cmd/templ@latest generate
@@ -27,8 +27,8 @@ var rootSideMenu = MenuItem{
 	Items: []MenuItem{
 		{Label: "Anchor", Route: "/anchor", Component: anchor.Styleguide},
 		{Label: "Button", Route: "/button", Component: button.Styleguide},
-		{Label: "Input date", Route: "/inputdate", Component: inputDate.Styleguide},
-		{Label: "Input number", Route: "/inputnumber", Component: inputNumber.Styleguide},
+		{Label: "Input date", Route: "/inputdate", Component: inputdate.Styleguide},
+		{Label: "Input number", Route: "/inputnumber", Component: inputnumber.Styleguide},
 	},
 }
 

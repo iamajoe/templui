@@ -11,14 +11,14 @@ templ layout(activeUrl string) {
 		</head>
 		<body>
 			<div class="flex flex-col h-screen">
-				<div class="flex justify-between items-center flex-shrink-0 px-10 py-4 text-sm border-b border-b-gray-200">
+				<div class="flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b border-b-gray-200">
 					<a href="/" class="text-2xl">TemplUI</a>
 				</div>
 				<div class="flex flex-grow">
-					<div class="w-72 px-6 bg-white flex-col space-y-4 text-sm border-r border-r-gray-200 py-6">
+					<div class="flex-col py-6 px-6 space-y-4 w-72 text-sm bg-white">
 						@menuLevel(rootSideMenu, 0, activeUrl)
 					</div>
-					<div class="relative flex-1 pl-10 pr-16 py-6">
+					<div class="relative flex-1 py-6 pr-16 pl-10">
 						{ children... }
 					</div>
 				</div>
@@ -30,7 +30,7 @@ templ layout(activeUrl string) {
 templ menuLevel(item MenuItem, level int, activeUrl string) {
 	if len(item.Items) > 0 {
 		if item.Label != "" {
-			<div class="text-gray-400 text-sm mb-1">{ item.Label }</div>
+			<div class="mb-1 text-sm text-gray-400">{ item.Label }</div>
 		}
 		<div class="flex flex-col space-y-2">
 			for _, item := range item.Items {
@@ -38,7 +38,7 @@ templ menuLevel(item MenuItem, level int, activeUrl string) {
 			}
 		</div>
 	} else if item.Label == "" {
-		<div class="shrink-0 bg-grey-200 h-[1px] w-full"></div>
+		<div class="w-full shrink-0 bg-grey-200 h-[1px]"></div>
 	} else {
 		<a
 			class={
@@ -66,7 +66,7 @@ templ renderItem(title string, description string, activeUrl string, item templ.
 		<div class="mb-6">
 			<h1 class="text-2xl font-semibold tracking-light">{ title }</h1>
 			if len(description) > 0 {
-				<span class="text-gray-500 text-sm">{ description }</span>
+				<span class="text-sm text-gray-500">{ description }</span>
 			}
 		</div>
 		@item
