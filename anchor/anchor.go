@@ -4,21 +4,10 @@ import (
 	"context"
 	"io"
 
-	"github.com/a-h/templ"
+	"github.com/iamajoe/templui/element"
 )
 
-type (
-	OptsFn func(*Anchor)
-	Anchor struct {
-		ID         string
-		ClassNames []string
-		Attributes templ.Attributes
-
-		Href   string
-		Target Target
-	}
-	Target string
-)
+type Target string
 
 const (
 	TargetSelf   Target = "_self"
@@ -27,47 +16,30 @@ const (
 	TargetBlank  Target = "_blank"
 )
 
+type Anchor struct {
+	element.Element
+
+	Href   string
+	Target Target
+}
+
 func (c Anchor) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithID(id string) OptsFn {
-	return func(element *Anchor) {
-		element.ID = id
-	}
-}
-
-func WithClasses(classes ...string) OptsFn {
-	return func(element *Anchor) {
-		element.ClassNames = append(element.ClassNames, classes...)
-	}
-}
-
-func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *Anchor) {
-		if element.Attributes == nil {
-			element.Attributes = make(map[string]any)
-		}
-
-		for k, v := range attributes {
-			element.Attributes[k] = v
-		}
-	}
-}
-
-func WithHref(href string) OptsFn {
+func WithHref(href string) OptFn {
 	return func(element *Anchor) {
 		element.Href = href
 	}
 }
 
-func WithTarget(target Target) OptsFn {
+func WithTarget(target Target) OptFn {
 	return func(element *Anchor) {
 		element.Target = target
 	}
 }
 
-func New(opts ...OptsFn) Anchor {
+func New(opts ...OptFn) Anchor {
 	var c Anchor
 	for _, opt := range opts {
 		opt(&c)

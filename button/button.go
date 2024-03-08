@@ -4,21 +4,17 @@ import (
 	"context"
 	"io"
 
-	"github.com/a-h/templ"
+	"github.com/iamajoe/templui/element"
 )
 
-type (
-	OptsFn func(*Button)
-	Button struct {
-		ID         string
-		ClassNames []string
-		Attributes templ.Attributes
+type Button struct {
+	element.Element
 
-		Disabled bool
-		Kind     Kind
-	}
-	Kind string
-)
+	Disabled bool
+	Kind     Kind
+}
+
+type Kind string
 
 const (
 	KindSubmit Kind = "submit"
@@ -29,43 +25,19 @@ func (c Button) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithID(id string) OptsFn {
-	return func(element *Button) {
-		element.ID = id
-	}
-}
-
-func WithClasses(classes ...string) OptsFn {
-	return func(element *Button) {
-		element.ClassNames = append(element.ClassNames, classes...)
-	}
-}
-
-func WithAttributes(attributes map[string]any) OptsFn {
-	return func(element *Button) {
-		if element.Attributes == nil {
-			element.Attributes = make(map[string]any)
-		}
-
-		for k, v := range attributes {
-			element.Attributes[k] = v
-		}
-	}
-}
-
-func WithDisabled() OptsFn {
+func WithDisabled() OptFn {
 	return func(element *Button) {
 		element.Disabled = true
 	}
 }
 
-func WithKind(kind Kind) OptsFn {
+func WithKind(kind Kind) OptFn {
 	return func(element *Button) {
 		element.Kind = kind
 	}
 }
 
-func New(opts ...OptsFn) Button {
+func New(opts ...OptFn) Button {
 	var c Button
 	for _, opt := range opts {
 		opt(&c)
