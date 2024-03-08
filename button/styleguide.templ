@@ -6,7 +6,7 @@ type styleguideItem struct {
 	title       string
 	description string
 	usage       string
-	opts        []OptsFn
+	opts        []OptFn
 }
 
 var styleguideItems = []styleguideItem{
@@ -21,7 +21,7 @@ var styleguideItems = []styleguideItem{
   button.WithKind(KindSubmit),
 ) { Button }
     `,
-		opts: []OptsFn{
+		opts: []OptFn{
 			WithID("zing"),
 			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
 			WithAttributes(map[string]any{"data-zed": "zung"}),

@@ -11,6 +11,7 @@ import (
 	"github.com/iamajoe/templui/button"
 	"github.com/iamajoe/templui/inputdate"
 	"github.com/iamajoe/templui/inputnumber"
+	"github.com/iamajoe/templui/inputtext"
 )
 
 //go:generate go run github.com/a-h/templ/cmd/templ@latest generate
@@ -29,6 +30,7 @@ var rootSideMenu = MenuItem{
 		{Label: "Button", Route: "/button", Component: button.Styleguide},
 		{Label: "Input date", Route: "/inputdate", Component: inputdate.Styleguide},
 		{Label: "Input number", Route: "/inputnumber", Component: inputnumber.Styleguide},
+		{Label: "Input text", Route: "/inputtext", Component: inputtext.Styleguide},
 	},
 }
 

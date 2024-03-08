@@ -1,0 +1,34 @@
+package inputtext
+
+import (
+	"strings"
+	"strconv"
+)
+
+templ render(props InputText) {
+	<input
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		type="text"
+		if props.Value != nil {
+			value={ strconv.Itoa(*props.Value) }
+		}
+		placeholder={ props.Placeholder }
+		if len(props.Name) > 0 {
+			autocomplete={ props.Name }
+			autocorrect="off"
+			name={ props.Name }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Disabled {
+			disabled
+		}
+		if props.Required {
+			required
+		}
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	/>
+}

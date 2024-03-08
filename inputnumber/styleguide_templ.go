@@ -18,7 +18,7 @@ type styleguideItem struct {
 	title       string
 	description string
 	usage       string
-	opts        []OptsFn
+	opts        []OptFn
 }
 
 var styleguideItems = []styleguideItem{
@@ -42,7 +42,7 @@ var styleguideItems = []styleguideItem{
     },
 )
     `,
-		opts: []OptsFn{
+		opts: []OptFn{
 			WithID("zing"),
 			WithClasses("foo"),
 			WithAttributes(map[string]any{"data-zed": "zung"}),

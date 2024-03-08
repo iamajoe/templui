@@ -15,7 +15,7 @@ install: ## Install dependencies
 	@$(GOCMD) mod download
 
 build: ## Builds templ files
-	@go generate ./element/element.go
+	@go generate ./...
 	@templ generate -path ./
 
 test: ## Run the tests of the project

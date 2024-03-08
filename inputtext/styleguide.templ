@@ -1,4 +1,4 @@
-package inputnumber
+package inputtext
 
 import (
 	"github.com/iamajoe/templui/utils"
@@ -15,19 +15,16 @@ var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
 		usage: `
-@inputnumber.New(
-    inputnumber.WithID("zing"),
-    inputnumber.WithClasses("foo"),
-    inputnumber.WithAttributes(map[string]any{"data-zed": "zung"}),
-    // inputnumber.WithDisabled(),
-    inputnumber.WithRequired(),
-    inputnumber.WithName("curr-salary"),
-    inputnumber.WithValue(500),
-    inputnumber.WithPlaceholder("Set your salary"),
-    inputnumber.WithMin(100),
-    inputnumber.WithMax(8000),
-    inputnumber.WithStep(10),
-    func(c *inputnumber.InputNumber) {
+@inputtext.New(
+    inputtext.WithID("zing"),
+    inputtext.WithClasses("foo"),
+    inputtext.WithAttributes(map[string]any{"data-zed": "zung"}),
+    // inputtext.WithDisabled(),
+    inputtext.WithRequired(),
+    inputtext.WithName("curr-salary"),
+    inputtext.WithValue(500),
+    inputtext.WithPlaceholder("Set your salary"),
+    func(c *inputtext.InputText) {
         c.ClassNames = append(c.ClassNames, "bar")
     },
 )
@@ -41,10 +38,7 @@ var styleguideItems = []styleguideItem{
 			WithName("curr-salary"),
 			WithValue(500),
 			WithPlaceholder("Set your salary"),
-			WithMin(100),
-			WithMax(8000),
-			WithStep(10),
-			func(c *InputNumber) {
+			func(c *InputText) {
 				c.ClassNames = append(c.ClassNames, "bar")
 			},
 		},
