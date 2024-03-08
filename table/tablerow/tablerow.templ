@@ -1,0 +1,19 @@
+package tablerow
+
+import (
+	"strings"
+)
+
+templ render(props TableRow) {
+	<tr
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	>
+		{ children... }
+	</tr>
+}

@@ -1,0 +1,26 @@
+package table
+
+import (
+	"strings"
+)
+
+templ render(props Table) {
+	<table
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	>
+		if props.HeaderRow != nil {
+			<thead>
+				@(*props.HeaderRow)
+			</thead>
+		}
+		<tbody>
+			{ children... }
+		</tbody>
+	</table>
+}

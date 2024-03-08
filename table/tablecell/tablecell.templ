@@ -1,0 +1,33 @@
+package tablecell
+
+import (
+	"strings"
+)
+
+templ render(props TableCell) {
+	if props.IsHeader {
+		<th
+			if len(props.ID) > 0 {
+				id={ props.ID }
+			}
+			class={ strings.Join(props.ClassNames, " "), }
+			if props.Attributes != nil {
+				{ props.Attributes... }
+			}
+		>
+			{ children... }
+		</th>
+	} else {
+		<td
+			if len(props.ID) > 0 {
+				id={ props.ID }
+			}
+			class={ strings.Join(props.ClassNames, " "), }
+			if props.Attributes != nil {
+				{ props.Attributes... }
+			}
+		>
+			{ children... }
+		</td>
+	}
+}
