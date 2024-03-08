@@ -5,11 +5,12 @@ import (
 	"io"
 	"time"
 
-	"github.com/iamajoe/templui/element"
+	"github.com/iamajoe/templui"
 )
 
+//go:generate go run ../_generate/element.go -package=inputdate -struct=InputDate
 type InputDate struct {
-	element.Element
+	templui.Element
 
 	Disabled    bool
 	Required    bool

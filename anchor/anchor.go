@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/iamajoe/templui/element"
+	"github.com/iamajoe/templui"
 )
 
 type Target string
@@ -16,8 +16,9 @@ const (
 	TargetBlank  Target = "_blank"
 )
 
+//go:generate go run ../_generate/element.go -package=anchor -struct=Anchor
 type Anchor struct {
-	element.Element
+	templui.Element
 
 	Href   string
 	Target Target

@@ -4,11 +4,12 @@ import (
 	"context"
 	"io"
 
-	"github.com/iamajoe/templui/element"
+	"github.com/iamajoe/templui"
 )
 
+//go:generate go run ../_generate/element.go -package=button -struct=Button
 type Button struct {
-	element.Element
+	templui.Element
 
 	Disabled bool
 	Kind     Kind

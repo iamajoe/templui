@@ -6,18 +6,24 @@ type OptFn func(*InputDate)
 
 func WithID(id string) OptFn {
 	return func(element *InputDate) {
-		element.SetID(id)
+		element.ID = id
 	}
 }
 
 func WithClasses(classes ...string) OptFn {
 	return func(element *InputDate) {
-		element.SetClasses(classes...)
+		element.ClassNames = append(element.ClassNames, classes...)
 	}
 }
 
 func WithAttributes(attributes map[string]any) OptFn {
 	return func(element *InputDate) {
-		element.SetAttributes(attributes)
+		if element.Attributes == nil {
+			element.Attributes = make(map[string]any)
+		}
+
+		for k, v := range attributes {
+			element.Attributes[k] = v
+		}
 	}
 }
