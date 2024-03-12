@@ -124,3 +124,4 @@ make test
 
 - https://eui.elastic.co/
 - https://ui.shadcn.com/
+- https://daisyui.com/
