@@ -70,6 +70,7 @@ func GetButtonProps(id string, color string, disabled bool) []button.OptFn {
 - [Input date](./inputdate)
 - [Input number](./inputnumber)
 - [Input text](./inputtext)
+- [Select](./select)
 - [Table](./table)
 
 ## Development
@@ -93,7 +94,7 @@ make test
 - [ ] Radio
 - [ ] Checkbox
 - [ ] Toggle
-- [ ] Select
+- [ ] Select (with search / html template)
 - [ ] Form group
 - [ ] Alert
 - [ ] Badge

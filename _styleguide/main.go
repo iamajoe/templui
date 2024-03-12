@@ -12,6 +12,7 @@ import (
 	"github.com/iamajoe/templui/inputdate"
 	"github.com/iamajoe/templui/inputnumber"
 	"github.com/iamajoe/templui/inputtext"
+	"github.com/iamajoe/templui/selectbox"
 	"github.com/iamajoe/templui/table"
 )
 
@@ -32,6 +33,7 @@ var rootSideMenu = MenuItem{
 		{Label: "Input date", Route: "/inputdate", Component: inputdate.Styleguide},
 		{Label: "Input number", Route: "/inputnumber", Component: inputnumber.Styleguide},
 		{Label: "Input text", Route: "/inputtext", Component: inputtext.Styleguide},
+		{Label: "Select", Route: "/select", Component: selectbox.Styleguide},
 		{Label: "Table", Route: "/table", Component: table.Styleguide},
 	},
 }

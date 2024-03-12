@@ -1,29 +1,27 @@
-package inputtext
+package formelement
 
-// NOTE: Don't change this file. It is auto generated! You will lose any change
-
-type OptFn func(*InputText)
+type OptFn func(*Element)
 
 func WithDisabled() OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.Disabled = true
 	}
 }
 
 func WithRequired() OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.Required = true
 	}
 }
 
 func WithPlaceholder(placeholder string) OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.Placeholder = placeholder
 	}
 }
 
 func WithName(name string) OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.Name = name
 	}
 }
@@ -32,19 +30,19 @@ func WithName(name string) OptFn {
 // NOTE: copied from ../element.go
 
 func WithID(id string) OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.ID = id
 	}
 }
 
 func WithClasses(classes ...string) OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		element.ClassNames = append(element.ClassNames, classes...)
 	}
 }
 
 func WithAttributes(attributes map[string]any) OptFn {
-	return func(element *InputText) {
+	return func(element *Element) {
 		if element.Attributes == nil {
 			element.Attributes = make(map[string]any)
 		}

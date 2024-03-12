@@ -74,9 +74,11 @@ func main() {
 		os.Exit(2)
 	}
 
+	tmplPath := strings.ReplaceAll(*fTmplPath, "'", "")
+
 	// no point in going further than 5 folders up, if that happens,
 	// the file doesn't exist
-	tmpl, err := getTemplateData(*fTmplPath, 5)
+	tmpl, err := getTemplateData(tmplPath, 5)
 	if err != nil {
 		flag.Usage()
 		panic(err)

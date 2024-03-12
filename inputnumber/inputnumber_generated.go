@@ -4,6 +4,33 @@ package inputnumber
 
 type OptFn func(*InputNumber)
 
+func WithDisabled() OptFn {
+	return func(element *InputNumber) {
+		element.Disabled = true
+	}
+}
+
+func WithRequired() OptFn {
+	return func(element *InputNumber) {
+		element.Required = true
+	}
+}
+
+func WithPlaceholder(placeholder string) OptFn {
+	return func(element *InputNumber) {
+		element.Placeholder = placeholder
+	}
+}
+
+func WithName(name string) OptFn {
+	return func(element *InputNumber) {
+		element.Name = name
+	}
+}
+
+///////////////////////////////
+// NOTE: copied from ../element.go
+
 func WithID(id string) OptFn {
 	return func(element *InputNumber) {
 		element.ID = id

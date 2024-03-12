@@ -4,6 +4,33 @@ package inputdate
 
 type OptFn func(*InputDate)
 
+func WithDisabled() OptFn {
+	return func(element *InputDate) {
+		element.Disabled = true
+	}
+}
+
+func WithRequired() OptFn {
+	return func(element *InputDate) {
+		element.Required = true
+	}
+}
+
+func WithPlaceholder(placeholder string) OptFn {
+	return func(element *InputDate) {
+		element.Placeholder = placeholder
+	}
+}
+
+func WithName(name string) OptFn {
+	return func(element *InputDate) {
+		element.Name = name
+	}
+}
+
+///////////////////////////////
+// NOTE: copied from ../element.go
+
 func WithID(id string) OptFn {
 	return func(element *InputDate) {
 		element.ID = id

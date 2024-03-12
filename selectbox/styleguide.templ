@@ -1,0 +1,52 @@
+package selectbox
+
+import (
+	"fmt"
+	"github.com/iamajoe/templui/utils"
+)
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: fmt.Sprintf(`
+@selectbox.New(
+  selectbox.WithID("zing"),
+  selectbox.WithClasses("border border-slate-200"),
+  selectbox.WithAttributes(map[string]any{"data-zed": "zung"}),
+  // selectbox.WithDisabled(),
+  selectbox.WithItems([]selectbox.SelectItem{
+    {Value: "1", Label: "1", Selected: true},
+    {Value: "2", Label: "2"},
+  }),
+  selectbox.WithValue("2"),
+) 
+    `),
+		opts: []OptFn{
+			WithID("zing"),
+			WithClasses("foo"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			// WithDisabled(),
+
+			WithItems([]SelectItem{
+				{Value: "1", Label: "1", Selected: true},
+				{Value: "2", Label: "2"},
+			}),
+			WithValue("2"),
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...)
+		}
+	}
+}
