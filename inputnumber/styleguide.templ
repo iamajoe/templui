@@ -1,0 +1,60 @@
+package inputnumber
+
+import (
+	"github.com/iamajoe/templui/utils"
+)
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: `
+@inputnumber.New(
+    inputnumber.WithID("zing"),
+    inputnumber.WithClasses("foo"),
+    inputnumber.WithAttributes(map[string]any{"data-zed": "zung"}),
+    // inputnumber.WithDisabled(),
+    inputnumber.WithRequired(),
+    inputnumber.WithName("curr-salary"),
+    inputnumber.WithValue(500),
+    inputnumber.WithPlaceholder("Set your salary"),
+    inputnumber.WithMin(100),
+    inputnumber.WithMax(8000),
+    inputnumber.WithStep(10),
+    func(c *inputnumber.InputNumber) {
+        c.ClassNames = append(c.ClassNames, "bar")
+    },
+)
+    `,
+		opts: []OptFn{
+			WithID("zing"),
+			WithClasses("foo"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			// WithDisabled(),
+			WithRequired(),
+			WithName("curr-salary"),
+			WithValue(500),
+			WithPlaceholder("Set your salary"),
+			WithMin(100),
+			WithMax(8000),
+			WithStep(10),
+			func(c *InputNumber) {
+				c.ClassNames = append(c.ClassNames, "bar")
+			},
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...)
+		}
+	}
+}

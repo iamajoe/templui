@@ -1,0 +1,47 @@
+package table
+
+import (
+	"fmt"
+	"github.com/iamajoe/templui/utils"
+)
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: fmt.Sprintf(`
+@table.New(
+  table.WithID("zing"),
+  table.WithClasses("border border-slate-200"),
+  table.WithAttributes(map[string]any{"data-zed": "zung"}),
+  table.WithHeader("ID", "Status"),
+  table.WithHeaderClasses("bg-slate-50 border-b border-slate-800"),
+  table.WithRows([]string{"1", "<span class=\"text-red-500\">Rejected</span>"}),
+  table.WithRowClasses("border-b border-slate-800"),
+) 
+    `),
+		opts: []OptFn{
+			WithID("zing"),
+			WithClasses("border border-slate-200"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			WithHeader("ID", "Status"),
+			WithHeaderClasses("bg-slate-50 border-b border-slate-800"),
+			WithRows([]string{"1", "<span class=\"text-red-500\">Rejected</span>"}),
+			WithRowClasses("border-b border-slate-800"),
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...)
+		}
+	}
+}

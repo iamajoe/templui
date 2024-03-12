@@ -6,7 +6,13 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ"
+
+	"github.com/iamajoe/templui/anchor"
 	"github.com/iamajoe/templui/button"
+	"github.com/iamajoe/templui/inputdate"
+	"github.com/iamajoe/templui/inputnumber"
+	"github.com/iamajoe/templui/inputtext"
+	"github.com/iamajoe/templui/table"
 )
 
 //go:generate go run github.com/a-h/templ/cmd/templ@latest generate
@@ -21,8 +27,12 @@ type MenuItem struct {
 
 var rootSideMenu = MenuItem{
 	Items: []MenuItem{
-		{Label: "Anchor", Route: "/anchor"},
+		{Label: "Anchor", Route: "/anchor", Component: anchor.Styleguide},
 		{Label: "Button", Route: "/button", Component: button.Styleguide},
+		{Label: "Input date", Route: "/inputdate", Component: inputdate.Styleguide},
+		{Label: "Input number", Route: "/inputnumber", Component: inputnumber.Styleguide},
+		{Label: "Input text", Route: "/inputtext", Component: inputtext.Styleguide},
+		{Label: "Table", Route: "/table", Component: table.Styleguide},
 	},
 }
 

@@ -1,0 +1,54 @@
+package inputtext
+
+import (
+	"github.com/iamajoe/templui/utils"
+)
+
+type styleguideItem struct {
+	title       string
+	description string
+	usage       string
+	opts        []OptFn
+}
+
+var styleguideItems = []styleguideItem{
+	{
+		title: "Default",
+		usage: `
+@inputtext.New(
+    inputtext.WithID("zing"),
+    inputtext.WithClasses("foo"),
+    inputtext.WithAttributes(map[string]any{"data-zed": "zung"}),
+    // inputtext.WithDisabled(),
+    inputtext.WithRequired(),
+    inputtext.WithName("curr-salary"),
+    inputtext.WithValue(500),
+    inputtext.WithPlaceholder("Set your salary"),
+    func(c *inputtext.InputText) {
+        c.ClassNames = append(c.ClassNames, "bar")
+    },
+)
+    `,
+		opts: []OptFn{
+			WithID("zing"),
+			WithClasses("foo"),
+			WithAttributes(map[string]any{"data-zed": "zung"}),
+			// WithDisabled(),
+			WithRequired(),
+			WithName("curr-salary"),
+			WithValue(500),
+			WithPlaceholder("Set your salary"),
+			func(c *InputText) {
+				c.ClassNames = append(c.ClassNames, "bar")
+			},
+		},
+	},
+}
+
+templ Styleguide() {
+	for _, component := range styleguideItems {
+		@utils.Item(component.title, component.description, component.usage) {
+			@New(component.opts...)
+		}
+	}
+}

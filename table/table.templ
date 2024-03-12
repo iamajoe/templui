@@ -1,0 +1,35 @@
+package table
+
+import (
+	"strings"
+)
+
+templ render(props Table) {
+	<table
+		if len(props.ID) > 0 {
+			id={ props.ID }
+		}
+		class={ strings.Join(props.ClassNames, " "), }
+		if props.Attributes != nil {
+			{ props.Attributes... }
+		}
+	>
+		if props.HeaderRow != nil {
+			<thead>
+				for _, col := range props.HeaderRow {
+					<th class={ strings.Join(props.HeaderClasses, " "), }>{ col }</th>
+				}
+			</thead>
+		}
+		<tbody>
+			for _, row := range props.Rows {
+				<tr class={ strings.Join(props.HeaderClasses, " "), }>
+					for _, col := range row {
+						<td>@templ.Raw(col)
+</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+}

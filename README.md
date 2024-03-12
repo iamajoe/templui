@@ -46,8 +46,8 @@ func ProjectButton(id string, color string) templ.Component {
 Or you could for example create a props slice depending on incoming data:
 
 ```go
-func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
-    opts := []button.OptsFn {
+func GetButtonProps(id string, color string, disabled bool) []button.OptFn {
+    opts := []button.OptFn {
         WithClasses("bg-" + color),
         WithAttributes(map[string]any{"data-id": id}),
         WithKind(button.KindSubmit),
@@ -67,6 +67,10 @@ func GetButtonProps(id string, color string, disabled bool) []button.OptsFn {
 
 - [Anchor](./anchor)
 - [Button](./button)
+- [Input date](./inputdate)
+- [Input number](./inputnumber)
+- [Input text](./inputtext)
+- [Table](./table)
 
 ## Development
 
@@ -85,11 +89,11 @@ make test
 
 ## TODO
 
+- [ ] Input ???
 - [ ] Radio
 - [ ] Checkbox
 - [ ] Toggle
 - [ ] Select
-- [ ] Input
 - [ ] Form group
 - [ ] Alert
 - [ ] Badge
@@ -103,6 +107,16 @@ make test
 - [ ] Pagination
 - [ ] Separator
 - [ ] Slider
-- [ ] Table
-- [ ] Themes
-- [ ] Styleguide
+- [ ] Themes 
+  - color-scheme: light/dark system scheme
+  - global variables
+  - scoped css?!
+  - scoped js?!
+  - themes based on common colorschemes: monokai, dracula, catpuccin...
+- [ ] Styleguide prettify
+- [ ] Test test test
+
+### References
+
+- https://eui.elastic.co/
+- https://ui.shadcn.com/
