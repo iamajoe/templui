@@ -4,54 +4,26 @@ import (
 	"context"
 	"io"
 
-	"github.com/iamajoe/templui"
+	"github.com/iamajoe/templui/formelement"
 )
 
-//go:generate go run ../_generate/element.go -package=inputnumber -struct=InputNumber
+//go:generate go run ../_generate/element.go -tmpl='formelement/elementopts.go' -tmpl-package=formelement -package=inputnumber -struct=InputNumber
 type InputNumber struct {
-	templui.Element
+	formelement.Element
 
-	Disabled    bool
-	Required    bool
-	Value       *int
-	Placeholder string
-	Name        string
-	Min         *int
-	Max         *int
-	Step        *int
+	Value *int
+	Min   *int
+	Max   *int
+	Step  *int
 }
 
 func (c InputNumber) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithDisabled() OptFn {
-	return func(element *InputNumber) {
-		element.Disabled = true
-	}
-}
-
-func WithName(name string) OptFn {
-	return func(element *InputNumber) {
-		element.Name = name
-	}
-}
-
-func WithRequired() OptFn {
-	return func(element *InputNumber) {
-		element.Required = true
-	}
-}
-
 func WithValue(value int) OptFn {
 	return func(element *InputNumber) {
 		element.Value = &value
-	}
-}
-
-func WithPlaceholder(placeholder string) OptFn {
-	return func(element *InputNumber) {
-		element.Placeholder = placeholder
 	}
 }
 
