@@ -1,10 +1,18 @@
 package templui
 
+import "github.com/a-h/templ"
+
 type OptFn func(*Element)
 
 func WithID(id string) OptFn {
 	return func(element *Element) {
 		element.ID = id
+	}
+}
+
+func WithCSS(css templ.CSSClass) OptFn {
+	return func(element *Element) {
+		element.CSS = css
 	}
 }
 

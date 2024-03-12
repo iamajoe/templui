@@ -1,6 +1,9 @@
 package button
 
-import "github.com/iamajoe/templui/utils"
+import (
+	"github.com/iamajoe/templui/utils"
+	"fmt"
+)
 
 type styleguideItem struct {
 	title       string
@@ -12,23 +15,38 @@ type styleguideItem struct {
 var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
-		usage: `
+		usage: fmt.Sprintf(`
+%s exampleCss() {
+  border: 1px solid red;
+}
+
 @button.New(
   button.WithID("zing"),
   button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
   button.WithAttributes(map[string]any{ "data-zed": "zung" }),
+  button.WithCSS(exampleCss()),
   // button.WithDisabled(),
   button.WithKind(KindSubmit),
 ) { Button }
-    `,
+    `, "css"),
 		opts: []OptFn{
 			WithID("zing"),
 			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
 			WithAttributes(map[string]any{"data-zed": "zung"}),
+			WithCSS(exampleCss()),
 			// button.WithDisabled(),
 			WithKind(KindSubmit),
 		},
 	},
+}
+
+css exampleCss() {
+	border: 1px solid red;
+}
+
+script alert() {
+  window.foo ="bar"
+  alert("hey! you just clicked")
 }
 
 templ Styleguide() {

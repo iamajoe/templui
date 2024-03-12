@@ -2,6 +2,8 @@ package inputdate
 
 // NOTE: Don't change this file. It is auto generated! You will lose any change
 
+import "github.com/a-h/templ"
+
 type OptFn func(*InputDate)
 
 func WithDisabled() OptFn {
@@ -34,6 +36,12 @@ func WithName(name string) OptFn {
 func WithID(id string) OptFn {
 	return func(element *InputDate) {
 		element.ID = id
+	}
+}
+
+func WithCSS(css templ.CSSClass) OptFn {
+	return func(element *InputDate) {
+		element.CSS = css
 	}
 }
 

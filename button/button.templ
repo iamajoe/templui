@@ -1,9 +1,5 @@
 package button
 
-import (
-	"strings"
-)
-
 templ render(props Button) {
 	<button
 		if len(props.ID) > 0 {
@@ -14,7 +10,7 @@ templ render(props Button) {
 		} else {
 			type={ string(props.Kind) }
 		}
-		class={ strings.Join(props.ClassNames, " "), }
+		class={ props.ClassNames, props.CSS }
 		if props.Disabled {
 			disabled
 		}

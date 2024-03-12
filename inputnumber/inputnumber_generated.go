@@ -2,6 +2,8 @@ package inputnumber
 
 // NOTE: Don't change this file. It is auto generated! You will lose any change
 
+import "github.com/a-h/templ"
+
 type OptFn func(*InputNumber)
 
 func WithDisabled() OptFn {
@@ -34,6 +36,12 @@ func WithName(name string) OptFn {
 func WithID(id string) OptFn {
 	return func(element *InputNumber) {
 		element.ID = id
+	}
+}
+
+func WithCSS(css templ.CSSClass) OptFn {
+	return func(element *InputNumber) {
+		element.CSS = css
 	}
 }
 

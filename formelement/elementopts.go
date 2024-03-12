@@ -1,5 +1,7 @@
 package formelement
 
+import "github.com/a-h/templ"
+
 type OptFn func(*Element)
 
 func WithDisabled() OptFn {
@@ -32,6 +34,12 @@ func WithName(name string) OptFn {
 func WithID(id string) OptFn {
 	return func(element *Element) {
 		element.ID = id
+	}
+}
+
+func WithCSS(css templ.CSSClass) OptFn {
+	return func(element *Element) {
+		element.CSS = css
 	}
 }
 

@@ -9,8 +9,12 @@ import "github.com/a-h/templ"
 import "context"
 import "io"
 import "bytes"
+import "strings"
 
-import "github.com/iamajoe/templui/utils"
+import (
+	"fmt"
+	"github.com/iamajoe/templui/utils"
+)
 
 type styleguideItem struct {
 	title       string
@@ -22,23 +26,50 @@ type styleguideItem struct {
 var styleguideItems = []styleguideItem{
 	{
 		title: "Default",
-		usage: `
+		usage: fmt.Sprintf(`
+%s exampleCss() {
+  border: 1px solid red;
+}
+
 @button.New(
   button.WithID("zing"),
   button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
   button.WithAttributes(map[string]any{ "data-zed": "zung" }),
+  button.WithCSS(exampleCss()),
   // button.WithDisabled(),
   button.WithKind(KindSubmit),
 ) { Button }
-    `,
+    `, "css"),
 		opts: []OptFn{
 			WithID("zing"),
 			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
 			WithAttributes(map[string]any{"data-zed": "zung"}),
+			WithCSS(exampleCss()),
 			// button.WithDisabled(),
 			WithKind(KindSubmit),
 		},
 	},
+}
+
+func exampleCss() templ.CSSClass {
+	var templ_7745c5c3_CSSBuilder strings.Builder
+	templ_7745c5c3_CSSBuilder.WriteString(`border:1px solid red;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`exampleCss`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func alert() templ.ComponentScript {
+	return templ.ComponentScript{
+		Name: `__templ_alert_7813`,
+		Function: `function __templ_alert_7813(){window.foo ="bar"
+  alert("hey! you just clicked")
+}`,
+		Call:       templ.SafeScript(`__templ_alert_7813`),
+		CallInline: templ.SafeScriptInline(`__templ_alert_7813`),
+	}
 }
 
 func Styleguide() templ.Component {
