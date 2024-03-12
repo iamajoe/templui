@@ -90,7 +90,6 @@ make test
 ## TODO
 
 - [ ] Input ???
-- [ ] Table
 - [ ] Radio
 - [ ] Checkbox
 - [ ] Toggle

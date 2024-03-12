@@ -16,11 +16,20 @@ templ render(props Table) {
 	>
 		if props.HeaderRow != nil {
 			<thead>
-				@(*props.HeaderRow)
+				for _, col := range props.HeaderRow {
+					<th class={ strings.Join(props.HeaderClasses, " "), }>{ col }</th>
+				}
 			</thead>
 		}
 		<tbody>
-			{ children... }
+			for _, row := range props.Rows {
+				<tr class={ strings.Join(props.HeaderClasses, " "), }>
+					for _, col := range row {
+						<td>@templ.Raw(col)
+</td>
+					}
+				</tr>
+			}
 		</tbody>
 	</table>
 }

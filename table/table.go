@@ -4,7 +4,6 @@ import (
 	"context"
 	"io"
 
-	"github.com/a-h/templ"
 	"github.com/iamajoe/templui"
 )
 
@@ -12,16 +11,38 @@ import (
 type Table struct {
 	templui.Element
 
-	HeaderRow *templ.Component
+	HeaderRow     []string
+	HeaderClasses []string
+
+	Rows       [][]string
+	RowClasses []string
 }
 
 func (c Table) Render(ctx context.Context, w io.Writer) error {
 	return render(c).Render(ctx, w)
 }
 
-func WithHeader(headerRow templ.Component) OptFn {
+func WithHeader(headerRow ...string) OptFn {
 	return func(c *Table) {
-		c.HeaderRow = &headerRow
+		c.HeaderRow = headerRow
+	}
+}
+
+func WithHeaderClasses(classes ...string) OptFn {
+	return func(c *Table) {
+		c.HeaderClasses = classes
+	}
+}
+
+func WithRows(rows ...[]string) OptFn {
+	return func(c *Table) {
+		c.Rows = rows
+	}
+}
+
+func WithRowClasses(classes ...string) OptFn {
+	return func(c *Table) {
+		c.RowClasses = classes
 	}
 }
 
