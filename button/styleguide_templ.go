@@ -12,7 +12,7 @@ import "bytes"
 import "strings"
 
 import (
-	"fmt"
+	"github.com/iamajoe/templui/theme"
 	"github.com/iamajoe/templui/utils"
 )
 
@@ -20,33 +20,83 @@ type styleguideItem struct {
 	title       string
 	description string
 	usage       string
-	opts        []OptFn
+	opts        [][]OptFn
 }
 
 var styleguideItems = []styleguideItem{
 	{
-		title: "Default",
-		usage: fmt.Sprintf(`
-%s exampleCss() {
-  border: 1px solid red;
-}
-
-@button.New(
-  button.WithID("zing"),
-  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
-  button.WithCSS(exampleCss()),
-  // button.WithDisabled(),
-  button.WithKind(KindSubmit),
-) { Button }
-    `, "css"),
-		opts: []OptFn{
-			WithID("zing"),
-			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-			WithAttributes(map[string]any{"data-zed": "zung"}),
-			WithCSS(exampleCss()),
-			// button.WithDisabled(),
-			WithKind(KindSubmit),
+		title: "Variant (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Variant: theme.VariantDefault | VariantBorder | VariantTransparent | VariantLink,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantDefault,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantBorder,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantTransparent,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantLink,
+				})),
+			},
+		},
+	},
+	{
+		title: "Role (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Role: theme.RoleDefault | RolePrimary | RoleSecondary | RoleInfo | RoleWarning | RoleDanger | RoleSuccess,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDefault,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RolePrimary,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSecondary,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleInfo,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleWarning,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDanger,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSuccess,
+				})),
+			},
 		},
 	},
 }
@@ -58,17 +108,6 @@ func exampleCss() templ.CSSClass {
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
 		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
-func alert() templ.ComponentScript {
-	return templ.ComponentScript{
-		Name: `__templ_alert_7813`,
-		Function: `function __templ_alert_7813(){window.foo ="bar"
-  alert("hey! you just clicked")
-}`,
-		Call:       templ.SafeScript(`__templ_alert_7813`),
-		CallInline: templ.SafeScriptInline(`__templ_alert_7813`),
 	}
 }
 
@@ -85,29 +124,89 @@ func Styleguide() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		var templ_7745c5c3_Var2 = []any{theme.Synthwave()}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var2).String()))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><pre class=\"p-6 whitespace-pre-wrap bg-gray-100\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(`
+  @button.New(
+      button.WithID("zing"),
+      button.WithClasses("foo"),
+      button.WithAttributes(map[string]any{"data-zed": "zung"}),
+      button.WithKind(button.KindSubmit),
+      button.WithCSS(exampleCss()),
+      button.WithDisabled(),
+      func(c *button.Button) {
+          c.ClassNames = append(c.ClassNames, "bar")
+      },
+  ) { Button }
+  `)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `button/styleguide.templ`, Line: 111, Col: 3}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</pre>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		for _, component := range styleguideItems {
-			templ_7745c5c3_Var2 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Var4 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 				if !templ_7745c5c3_IsBuffer {
 					templ_7745c5c3_Buffer = templ.GetBuffer()
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
-				templ_7745c5c3_Var3 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-					templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-					if !templ_7745c5c3_IsBuffer {
-						templ_7745c5c3_Buffer = templ.GetBuffer()
-						defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-					}
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Button ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-wrap\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				for _, opts := range component.opts {
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mr-2\">")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					if !templ_7745c5c3_IsBuffer {
-						_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Var5 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+						templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+						if !templ_7745c5c3_IsBuffer {
+							templ_7745c5c3_Buffer = templ.GetBuffer()
+							defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+						}
+						_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Button ")
+						if templ_7745c5c3_Err != nil {
+							return templ_7745c5c3_Err
+						}
+						if !templ_7745c5c3_IsBuffer {
+							_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
+						}
+						return templ_7745c5c3_Err
+					})
+					templ_7745c5c3_Err = New(opts...).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
 					}
-					return templ_7745c5c3_Err
-				})
-				templ_7745c5c3_Err = New(component.opts...).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -116,7 +215,7 @@ func Styleguide() templ.Component {
 				}
 				return templ_7745c5c3_Err
 			})
-			templ_7745c5c3_Err = utils.Item(component.title, component.description, component.usage).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = utils.Item(component.title, component.description, component.usage).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

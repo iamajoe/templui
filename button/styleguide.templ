@@ -2,40 +2,90 @@ package button
 
 import (
 	"github.com/iamajoe/templui/utils"
-	"fmt"
+	"github.com/iamajoe/templui/theme"
 )
 
 type styleguideItem struct {
 	title       string
 	description string
 	usage       string
-	opts        []OptFn
+	opts        [][]OptFn
 }
 
 var styleguideItems = []styleguideItem{
 	{
-		title: "Default",
-		usage: fmt.Sprintf(`
-%s exampleCss() {
-  border: 1px solid red;
-}
-
-@button.New(
-  button.WithID("zing"),
-  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
-  button.WithCSS(exampleCss()),
-  // button.WithDisabled(),
-  button.WithKind(KindSubmit),
-) { Button }
-    `, "css"),
-		opts: []OptFn{
-			WithID("zing"),
-			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-			WithAttributes(map[string]any{"data-zed": "zung"}),
-			WithCSS(exampleCss()),
-			// button.WithDisabled(),
-			WithKind(KindSubmit),
+		title: "Variant (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Variant: theme.VariantDefault | VariantBorder | VariantTransparent | VariantLink,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantDefault,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantBorder,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantTransparent,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantLink,
+				})),
+			},
+		},
+	},
+	{
+		title: "Role (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Role: theme.RoleDefault | RolePrimary | RoleSecondary | RoleInfo | RoleWarning | RoleDanger | RoleSuccess,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDefault,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RolePrimary,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSecondary,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleInfo,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleWarning,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDanger,
+				})),
+			},
+			[]OptFn{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSuccess,
+				})),
+			},
 		},
 	},
 }
@@ -44,17 +94,34 @@ css exampleCss() {
 	border: 1px solid red;
 }
 
-script alert() {
-  window.foo ="bar"
-  alert("hey! you just clicked")
-}
-
 templ Styleguide() {
+	<div class={ theme.Synthwave() }></div>
+	<pre class="p-6 whitespace-pre-wrap bg-gray-100">
+		{ `
+  @button.New(
+      button.WithID("zing"),
+      button.WithClasses("foo"),
+      button.WithAttributes(map[string]any{"data-zed": "zung"}),
+      button.WithKind(button.KindSubmit),
+      button.WithCSS(exampleCss()),
+      button.WithDisabled(),
+      func(c *button.Button) {
+          c.ClassNames = append(c.ClassNames, "bar")
+      },
+  ) { Button }
+  ` }
+	</pre>
 	for _, component := range styleguideItems {
 		@utils.Item(component.title, component.description, component.usage) {
-			@New(component.opts...) {
-				Button 
-			}
+			<div class="flex flex-wrap">
+				for _, opts := range component.opts {
+					<div class="mr-2">
+						@New(opts...) {
+							Button 
+						}
+					</div>
+				}
+			</div>
 		}
 	}
 }

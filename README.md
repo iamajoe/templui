@@ -111,11 +111,14 @@ make test
 - [ ] Themes 
   - color-scheme: light/dark system scheme
   - global variables
-  - scoped css?!
   - scoped js?!
   - themes based on common colorschemes: monokai, dracula, catpuccin...
 - [ ] Styleguide prettify
 - [ ] Test test test
+- [ ] Move styleguide themes to select on header
+- [ ] Dark / light mode on header of styleguide
+- [ ] Code should only show if toggled in
+- [ ] Styleguide should show functional methods for each component
 
 ### References
 
