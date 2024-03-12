@@ -24,7 +24,7 @@ templ render(props SelectBox) {
 		for _, item := range props.Items {
 			<option
 				value={ item.Value }
-				if item.Selected || props.Selected == item.Value {
+				if item.Selected || props.Value == item.Value {
 					selected
 				}
 			>{ item.Label }</option>
