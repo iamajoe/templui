@@ -70,7 +70,7 @@ func GetButtonProps(id string, color string, disabled bool) []button.OptFn {
 - [Input date](./inputdate)
 - [Input number](./inputnumber)
 - [Input text](./inputtext)
-- [Select](./select)
+- [SelectBox](./selectbox)
 - [Table](./table)
 
 ## Development
