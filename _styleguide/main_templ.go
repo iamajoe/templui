@@ -23,7 +23,7 @@ func layout(activeUrl string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://cdn.tailwindcss.com\"></script><title>TemplUI</title></head><body><div class=\"flex flex-col h-screen\"><div class=\"flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b border-b-gray-200\"><a href=\"/\" class=\"text-2xl\">TemplUI</a></div><div class=\"flex flex-grow\"><div class=\"flex-col py-6 px-6 space-y-4 w-72 text-sm bg-white\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://cdn.tailwindcss.com\"></script><title>TemplUI</title></head><body><div class=\"flex flex-col h-screen\"><div class=\"flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b border-b-gray-200\"><a href=\"/\" class=\"text-2xl\">TemplUI</a></div><div class=\"flex flex-grow\"><div class=\"flex-col py-6 px-6 space-y-4 text-sm bg-white\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
