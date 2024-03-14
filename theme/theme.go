@@ -53,6 +53,17 @@ func Synthwave() templ.CSSClass {
     --templui-color-error: oklch(0.737005 0.121339 32.6393);
 
     --templui-radius: 8px;
+
+    --templui-font: 1rem;
+    --templui-font-size-s: 0.9rem;
+    --templui-font-size-xs: 0.8rem;
+    --templui-font-size-lg: 1.2rem;
+
+    --templui-btn-border: 1px;
+    --templui-btn-padding: 8px 16px;
+    --templui-btn-padding-s: 4px 10px;
+    --templui-btn-padding-xs: 2px 6px;
+    --templui-btn-padding-lg: 12px 24px;
 }
 
 :root.dark {

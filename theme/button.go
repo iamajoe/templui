@@ -43,19 +43,19 @@ func buttonGetColors(props ButtonProps) (background string, textColor string) {
 }
 
 func buttonGetSizes(props ButtonProps) (fontSize string, padding string) {
-	fontSize = "1rem"
-	padding = "8px 16px"
+	fontSize = "var(--templui-font-size)"
+	padding = "var(--templui-btn-padding)"
 
 	switch props.Size {
 	case SizeXs:
-		fontSize = "0.8rem"
-		padding = "2px 6px"
+		fontSize = "var(--templui-font-size-xs)"
+		padding = "var(--templui-btn-padding-xs)"
 	case SizeS:
-		fontSize = "0.9rem"
-		padding = "4px 10px"
+		fontSize = "var(--templui-font-size-s)"
+		padding = "var(--templui-btn-padding-s)"
 	case SizeLg:
-		fontSize = "1.2rem"
-		padding = "12px 24px"
+		fontSize = "var(--templui-font-size-lg)"
+		padding = "var(--templui-btn-padding-lg)"
 	}
 
 	return fontSize, padding
@@ -110,7 +110,7 @@ func Button(props ButtonProps) templ.CSSClass {
       padding: %s;
       background: %s;
       color: %s;
-      border: 1px solid %s;
+      border: var(--templui-btn-border) solid %s;
       border-radius: var(--templui-radius);
     }`, id, fontSize, padding, background, textColor, background)
 	}
