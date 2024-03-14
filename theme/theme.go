@@ -59,6 +59,7 @@ func Synthwave() templ.CSSClass {
     --templui-font-size-xs: 0.8rem;
     --templui-font-size-lg: 1.2rem;
 
+    --templui-btn-radius: var(--templui-radius);
     --templui-btn-border: 1px;
     --templui-btn-padding: 8px 16px;
     --templui-btn-padding-s: 4px 10px;

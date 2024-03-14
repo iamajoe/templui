@@ -101,7 +101,7 @@ func Button(props ButtonProps) templ.CSSClass {
       background: transparent;
       color: %s;
       border: 1px solid %s;
-      border-radius: var(--templui-radius);
+      border-radius: var(--templui-btn-radius);
     }`, id, fontSize, padding, textColor, textColor)
 	default:
 		class = fmt.Sprintf(`
@@ -111,7 +111,7 @@ func Button(props ButtonProps) templ.CSSClass {
       background: %s;
       color: %s;
       border: var(--templui-btn-border) solid %s;
-      border-radius: var(--templui-radius);
+      border-radius: var(--templui-btn-radius);
     }`, id, fontSize, padding, background, textColor, background)
 	}
 
