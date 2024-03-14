@@ -23,7 +23,7 @@ func layout(activeUrl string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://cdn.tailwindcss.com\"></script><title>TemplUI</title></head><body><div class=\"flex flex-col h-screen\"><div class=\"flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b border-b-gray-200\"><a href=\"/\" class=\"text-2xl\">TemplUI</a></div><div class=\"flex flex-grow\"><div class=\"flex-col py-6 px-6 space-y-4 text-sm bg-white\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>TemplUI</title><script src=\"https://cdn.tailwindcss.com\"></script><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css\" integrity=\"sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"><script>\n        tailwind.config = {\n          darkMode: ['variant', '&:is(.dark *)'],\n        }\n      </script></head><body class=\"mx-auto max-w-[1440px]\"><div class=\"flex flex-col h-screen\"><div class=\"flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b dark:border-gray-600 border-b-gray-200\"><a href=\"/\" class=\"text-2xl\">TemplUI</a><div><button class=\"text-lg\" onclick=\"document.querySelector(&#39;:root&#39;).classList.toggle(&#39;dark&#39;);\"><i class=\"fa-solid fa-circle-half-stroke\"></i></button></div></div><div class=\"flex flex-grow\"><div class=\"flex-col py-6 px-6 space-y-4 text-sm bg-white dark:bg-gray-900\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -31,7 +31,7 @@ func layout(activeUrl string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"relative flex-1 py-6 pr-16 pl-10\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"relative flex-1 py-6 px-10\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -72,7 +72,7 @@ func menuLevel(item MenuItem, level int, activeUrl string) templ.Component {
 				var templ_7745c5c3_Var3 string
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 32, Col: 55}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 46, Col: 55}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -104,9 +104,9 @@ func menuLevel(item MenuItem, level int, activeUrl string) templ.Component {
 			}
 		} else {
 			var templ_7745c5c3_Var4 = []any{
-				"px-2 py-2 items-center box-border no-underline font-semibold text-black rounded-md",
-				templ.KV("bg-white", activeUrl != item.Route),
-				templ.KV("bg-gray-200", activeUrl == item.Route),
+				"px-2 py-2 items-center box-border no-underline font-semibold text-black dark:text-white rounded-md",
+				templ.KV("bg-white dark:bg-black", activeUrl != item.Route),
+				templ.KV("bg-gray-200 dark:bg-gray-600", activeUrl == item.Route),
 			}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
@@ -136,7 +136,7 @@ func menuLevel(item MenuItem, level int, activeUrl string) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 50, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 64, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 			if templ_7745c5c3_Err != nil {
@@ -219,7 +219,7 @@ func renderItem(title string, description string, activeUrl string, item templ.C
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 66, Col: 60}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 80, Col: 60}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -237,7 +237,7 @@ func renderItem(title string, description string, activeUrl string, item templ.C
 				var templ_7745c5c3_Var12 string
 				templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(description)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 68, Col: 53}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `_styleguide/main.templ`, Line: 82, Col: 53}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 				if templ_7745c5c3_Err != nil {

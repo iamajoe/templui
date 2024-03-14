@@ -32,24 +32,54 @@ var styleguideItems = []styleguideItem{
 }))) { Button }
     `,
 		opts: [][]OptFn{
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantDefault,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantBorder,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantTransparent,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantLink,
+				})),
+			},
+		},
+	},
+	{
+		title: "Size (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Size: theme.SizeLg | SizeNormal | SizeS | SizeXs,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeLg,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeNormal,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeS,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeXs,
 				})),
 			},
 		},
@@ -62,37 +92,37 @@ var styleguideItems = []styleguideItem{
 }))) { Button }
     `,
 		opts: [][]OptFn{
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleDefault,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RolePrimary,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleSecondary,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleInfo,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleWarning,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleDanger,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleSuccess,
 				})),
@@ -137,7 +167,7 @@ func Styleguide() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><pre class=\"p-6 whitespace-pre-wrap bg-gray-100\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><pre class=\"p-6 whitespace-pre-wrap bg-gray-100 dark:bg-gray-800\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -156,7 +186,7 @@ func Styleguide() templ.Component {
   ) { Button }
   `)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `button/styleguide.templ`, Line: 111, Col: 3}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `button/styleguide.templ`, Line: 141, Col: 3}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -173,12 +203,12 @@ func Styleguide() templ.Component {
 					templ_7745c5c3_Buffer = templ.GetBuffer()
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-wrap\">")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-wrap items-center\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				for _, opts := range component.opts {
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mr-2\">")
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"mr-3\">")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}

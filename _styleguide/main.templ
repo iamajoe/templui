@@ -6,19 +6,33 @@ templ layout(activeUrl string) {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<script src="https://cdn.tailwindcss.com"></script>
 			<title>TemplUI</title>
+			<script src="https://cdn.tailwindcss.com"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+			<script>
+        tailwind.config = {
+          darkMode: ['variant', '&:is(.dark *)'],
+        }
+      </script>
 		</head>
-		<body>
+		<body class="mx-auto max-w-[1440px]">
 			<div class="flex flex-col h-screen">
-				<div class="flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b border-b-gray-200">
+				<div class="flex flex-shrink-0 justify-between items-center py-4 px-10 text-sm border-b dark:border-gray-600 border-b-gray-200">
 					<a href="/" class="text-2xl">TemplUI</a>
+					<div>
+						<button
+							class="text-lg"
+							onclick="document.querySelector(':root').classList.toggle('dark');"
+						>
+							<i class="fa-solid fa-circle-half-stroke"></i>
+						</button>
+					</div>
 				</div>
 				<div class="flex flex-grow">
-					<div class="flex-col py-6 px-6 space-y-4 text-sm bg-white">
+					<div class="flex-col py-6 px-6 space-y-4 text-sm bg-white dark:bg-gray-900">
 						@menuLevel(rootSideMenu, 0, activeUrl)
 					</div>
-					<div class="relative flex-1 py-6 pr-16 pl-10">
+					<div class="relative flex-1 py-6 px-10">
 						{ children... }
 					</div>
 				</div>
@@ -42,9 +56,9 @@ templ menuLevel(item MenuItem, level int, activeUrl string) {
 	} else {
 		<a
 			class={
-				"px-2 py-2 items-center box-border no-underline font-semibold text-black rounded-md",
-				templ.KV("bg-white", activeUrl != item.Route),
-				templ.KV("bg-gray-200", activeUrl == item.Route),
+				"px-2 py-2 items-center box-border no-underline font-semibold text-black dark:text-white rounded-md",
+				templ.KV("bg-white dark:bg-black", activeUrl != item.Route),
+				templ.KV("bg-gray-200 dark:bg-gray-600", activeUrl == item.Route),
 			}
 			href={ templ.URL(item.Route) }
 		>

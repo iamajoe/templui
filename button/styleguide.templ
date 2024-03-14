@@ -21,24 +21,54 @@ var styleguideItems = []styleguideItem{
 }))) { Button }
     `,
 		opts: [][]OptFn{
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantDefault,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantBorder,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantTransparent,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Variant: theme.VariantLink,
+				})),
+			},
+		},
+	},
+	{
+		title: "Size (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Size: theme.SizeLg | SizeNormal | SizeS | SizeXs,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeLg,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeNormal,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeS,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeXs,
 				})),
 			},
 		},
@@ -51,37 +81,37 @@ var styleguideItems = []styleguideItem{
 }))) { Button }
     `,
 		opts: [][]OptFn{
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleDefault,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RolePrimary,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleSecondary,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleInfo,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleWarning,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleDanger,
 				})),
 			},
-			[]OptFn{
+			{
 				WithCSS(theme.Button(theme.ButtonProps{
 					Role: theme.RoleSuccess,
 				})),
@@ -96,7 +126,7 @@ css exampleCss() {
 
 templ Styleguide() {
 	<div class={ theme.Synthwave() }></div>
-	<pre class="p-6 whitespace-pre-wrap bg-gray-100">
+	<pre class="p-6 whitespace-pre-wrap bg-gray-100 dark:bg-gray-800">
 		{ `
   @button.New(
       button.WithID("zing"),
@@ -113,9 +143,9 @@ templ Styleguide() {
 	</pre>
 	for _, component := range styleguideItems {
 		@utils.Item(component.title, component.description, component.usage) {
-			<div class="flex flex-wrap">
+			<div class="flex flex-wrap items-center">
 				for _, opts := range component.opts {
-					<div class="mr-2">
+					<div class="mr-3">
 						@New(opts...) {
 							Button 
 						}
