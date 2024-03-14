@@ -45,6 +45,7 @@ func buttonGetColors(props ButtonProps) (background string, textColor string) {
 func buttonGetSizes(props ButtonProps) (fontSize string, padding string) {
 	fontSize = "1rem"
 	padding = "8px 16px"
+
 	switch props.Size {
 	case SizeXs:
 		fontSize = "0.8rem"
@@ -64,7 +65,7 @@ func Button(props ButtonProps) templ.CSSClass {
 	id := fmt.Sprintf("templui_btn_%d_%d_%d", props.Variant, props.Size, props.Role)
 
 	background, textColor := buttonGetColors(props)
-	fontSize, padding := buttonGetColors(props)
+	fontSize, padding := buttonGetSizes(props)
 
 	class := ""
 
