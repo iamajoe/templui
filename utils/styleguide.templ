@@ -3,7 +3,7 @@ package utils
 import "strings"
 
 templ Item(title string, description string, usage string) {
-	<div class="grid grid-cols-1 gap-4 mt-6 p-6 border border-gray-200">
+	<div class="grid grid-cols-1 gap-4 p-6 mt-6 border border-gray-200 dark:border-gray-600">
 		if len(title) > 0 || len(description) > 0 {
 			<div>
 				if len(title) > 0 {
@@ -12,7 +12,7 @@ templ Item(title string, description string, usage string) {
 					</h1>
 				}
 				if len(description) > 0 {
-					<span class="text-gray-500 text-sm">
+					<span class="text-sm text-gray-500">
 						@templ.Raw(description)
 					</span>
 				}
@@ -22,7 +22,7 @@ templ Item(title string, description string, usage string) {
 			{ children... }
 		</div>
 		if len(usage) > 0 {
-			<pre class="bg-gray-100 p-6">{ strings.TrimSpace(usage) }</pre>
+			<pre class="p-6 whitespace-pre-wrap bg-gray-100 dark:bg-gray-800">{ strings.TrimSpace(usage) }</pre>
 		}
 	</div>
 }

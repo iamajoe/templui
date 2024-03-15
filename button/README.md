@@ -21,5 +21,5 @@ css exampleCss() {
     func(c *button.Button) {
         c.ClassNames = append(c.ClassNames, "bar")
     },
-)
+) { Button }
 ```
