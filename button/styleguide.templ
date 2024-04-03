@@ -2,40 +2,120 @@ package button
 
 import (
 	"github.com/iamajoe/templui/utils"
-	"fmt"
+	"github.com/iamajoe/templui/theme"
 )
 
 type styleguideItem struct {
 	title       string
 	description string
 	usage       string
-	opts        []OptFn
+	opts        [][]OptFn
 }
 
 var styleguideItems = []styleguideItem{
 	{
-		title: "Default",
-		usage: fmt.Sprintf(`
-%s exampleCss() {
-  border: 1px solid red;
-}
-
-@button.New(
-  button.WithID("zing"),
-  button.WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-  button.WithAttributes(map[string]any{ "data-zed": "zung" }),
-  button.WithCSS(exampleCss()),
-  // button.WithDisabled(),
-  button.WithKind(KindSubmit),
-) { Button }
-    `, "css"),
-		opts: []OptFn{
-			WithID("zing"),
-			WithClasses("bg-indigo-500", "text-white", "px-4", "py-1"),
-			WithAttributes(map[string]any{"data-zed": "zung"}),
-			WithCSS(exampleCss()),
-			// button.WithDisabled(),
-			WithKind(KindSubmit),
+		title: "Variant (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Variant: theme.VariantDefault | VariantBorder | VariantTransparent | VariantLink,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantDefault,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantBorder,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantTransparent,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Variant: theme.VariantLink,
+				})),
+			},
+		},
+	},
+	{
+		title: "Size (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Size: theme.SizeLg | SizeNormal | SizeS | SizeXs,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeLg,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeNormal,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeS,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Size: theme.SizeXs,
+				})),
+			},
+		},
+	},
+	{
+		title: "Role (Synthwave)",
+		usage: `
+@button.New(button.WithCSS(theme.Button(theme.ButtonProps{
+  Role: theme.RoleDefault | RolePrimary | RoleSecondary | RoleInfo | RoleWarning | RoleDanger | RoleSuccess,
+}))) { Button }
+    `,
+		opts: [][]OptFn{
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDefault,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RolePrimary,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSecondary,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleInfo,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleWarning,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleDanger,
+				})),
+			},
+			{
+				WithCSS(theme.Button(theme.ButtonProps{
+					Role: theme.RoleSuccess,
+				})),
+			},
 		},
 	},
 }
@@ -44,17 +124,34 @@ css exampleCss() {
 	border: 1px solid red;
 }
 
-script alert() {
-  window.foo ="bar"
-  alert("hey! you just clicked")
-}
-
 templ Styleguide() {
+	<div class={ theme.Synthwave() }></div>
+	<pre class="p-6 whitespace-pre-wrap bg-gray-100 dark:bg-gray-800">
+		{ `
+  @button.New(
+      button.WithID("zing"),
+      button.WithClasses("foo"),
+      button.WithAttributes(map[string]any{"data-zed": "zung"}),
+      button.WithKind(button.KindSubmit),
+      button.WithCSS(exampleCss()),
+      button.WithDisabled(),
+      func(c *button.Button) {
+          c.ClassNames = append(c.ClassNames, "bar")
+      },
+  ) { Button }
+  ` }
+	</pre>
 	for _, component := range styleguideItems {
 		@utils.Item(component.title, component.description, component.usage) {
-			@New(component.opts...) {
-				Button 
-			}
+			<div class="flex flex-wrap items-center">
+				for _, opts := range component.opts {
+					<div class="mr-3">
+						@New(opts...) {
+							Button 
+						}
+					</div>
+				}
+			</div>
 		}
 	}
 }
